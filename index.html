@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobRescue - Temukan Pekerjaan Mikro & UMKM di Sekitarmu</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-spinner">
+                    <i class="fas fa-check-square"></i>
+                </div>
+                <span class="loading-text">JobRescue</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-message">Memuat pengalaman terbaik...</p>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-check-square"></i>
+                </div>
+                <span class="brand-text">JobRescue</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active">Beranda</a></li>
+                <li><a href="#" class="nav-link">Cari Kerja</a></li>
+                <li><a href="cari-talent.html" class="nav-link">Cari Talent</a></li>
+                <li><a href="#" class="nav-link">Tentang</a></li>
+                <li><a href="#" class="nav-link">Login</a></li>
+            </ul>
+            
+            <button class="btn-register">Daftar</button>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="title-line">Temukan Pekerjaan</span>
+                            <span class="title-line highlight">Mikro & UMKM</span>
+                            <span class="title-line">di Kota Bogor</span>
+                            <span class="rocket">🚀</span>
+                        </h1>
+                        
+                        <button class="btn-primary">
+                            Cari Kerja Sekarang
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        
+                        <div class="search-container">
+                            <div class="search-box">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" placeholder="Masukkan skill atau kata kunci" class="search-input">
+                            </div>
+                            <div class="location-box">
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <select class="location-select">
+                                    <option value="">Pilih area di Bogor</option>
+                                    <option value="bogor-tengah">Bogor Tengah</option>
+                                    <option value="bogor-utara">Bogor Utara</option>
+                                    <option value="bogor-selatan">Bogor Selatan</option>
+                                    <option value="bogor-timur">Bogor Timur</option>
+                                    <option value="bogor-barat">Bogor Barat</option>
+                                    <option value="tanah-sareal">Tanah Sareal</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-illustration">
+                        <div class="illustration-container">
+                            <div class="person">
+                                <div class="head">
+                                    <div class="face">
+                                        <div class="eyes">
+                                            <div class="eye left"></div>
+                                            <div class="eye right"></div>
+                                        </div>
+                                        <div class="smile"></div>
+                                    </div>
+                                    <div class="hair"></div>
+                                </div>
+                                <div class="body">
+                                    <div class="shirt"></div>
+                                </div>
+                                <div class="laptop">
+                                    <div class="screen"></div>
+                                    <div class="keyboard"></div>
+                                </div>
+                            </div>
+                            <div class="background-elements">
+                                <div class="building building-1"></div>
+                                <div class="building building-2"></div>
+                                <div class="building building-3"></div>
+                                <div class="cloud cloud-1"></div>
+                                <div class="cloud cloud-2"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1250">0</div>
+                        <div class="stat-label">Pekerjaan di Bogor</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="350">0</div>
+                        <div class="stat-label">UMKM Bogor</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="2100">0</div>
+                        <div class="stat-label">Talent Bogor</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="98">0</div>
+                        <div class="stat-label">% Kepuasan</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Mengapa Memilih JobRescue Bogor?</h2>
+                    <p class="section-subtitle">Platform terpercaya untuk menghubungkan talenta Bogor dengan peluang kerja mikro lokal</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="feature-title">Kerja Kilat</h3>
+                        <p class="feature-subtitle">→ 2-7 hari</p>
+                        <p class="feature-description">Dapatkan pekerjaan dengan proses cepat dan efisien</p>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3 class="feature-title">UMKM Bogor Butuh Kamu</h3>
+                        <p class="feature-subtitle">Dukung ekonomi Bogor</p>
+                        <p class="feature-description">Bantu pertumbuhan bisnis kecil di Kota Bogor</p>
+                    </div>
+                    
+                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="feature-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="feature-title">Bangun Portofolio & Skill Baru</h3>
+                        <p class="feature-subtitle">Tingkatkan kemampuanmu</p>
+                        <p class="feature-description">Kembangkan keahlian melalui pengalaman kerja nyata</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Categories Section -->
+        <section class="job-categories">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kategori Pekerjaan Populer</h2>
+                    <p class="section-subtitle">Temukan pekerjaan sesuai dengan keahlian dan minat Anda</p>
+                </div>
+                <div class="categories-grid">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h3 class="category-title">Retail & Toko</h3>
+                        <p class="category-count">320+ Jobs</p>
+                        <div class="category-skills">
+                            <span class="skill-tag">Kasir</span>
+                            <span class="skill-tag">Sales</span>
+                            <span class="skill-tag">Inventory</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h3 class="category-title">Kuliner Bogor</h3>
+                        <p class="category-count">280+ Jobs</p>
+                        <div class="category-skills">
+                            <span class="skill-tag">Chef</span>
+                            <span class="skill-tag">Waitress</span>
+                            <span class="skill-tag">Delivery</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="category-title">Pendidikan</h3>
+                        <p class="category-count">250+ Jobs</p>
+                        <div class="category-skills">
+                            <span class="skill-tag">Guru Les</span>
+                            <span class="skill-tag">Tutor</span>
+                            <span class="skill-tag">Admin</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <h3 class="category-title">Transportasi</h3>
+                        <p class="category-count">200+ Jobs</p>
+                        <div class="category-skills">
+                            <span class="skill-tag">Driver</span>
+                            <span class="skill-tag">Ojek Online</span>
+                            <span class="skill-tag">Kurir</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3 class="category-title">Properti</h3>
+                        <p class="category-count">180+ Jobs</p>
+                        <div class="category-skills">
+                            <span class="skill-tag">Agent</span>
+                            <span class="skill-tag">Marketing</span>
+                            <span class="skill-tag">Surveyor</span>
+                        </div>
+                    </div>
+                    
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h3 class="category-title">IT & Digital</h3>
+                        <p class="category-count">150+ Jobs</p>
+                        <div class="category-skills">
+                            <span class="skill-tag">Web Dev</span>
+                            <span class="skill-tag">Design</span>
+                            <span class="skill-tag">Marketing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Cara Kerja JobRescue</h2>
+                    <p class="section-subtitle">Proses sederhana untuk mendapatkan pekerjaan impian Anda</p>
+                </div>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Daftar & Buat Profil</h3>
+                            <p class="step-description">Buat akun dan lengkapi profil dengan skill dan pengalaman Anda</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Cari & Apply Pekerjaan</h3>
+                            <p class="step-description">Jelajahi ribuan lowongan kerja dan apply sesuai keahlian</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Terima & Mulai Kerja</h3>
+                            <p class="step-description">Dapatkan konfirmasi dan mulai bekerja dengan klien terpercaya</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Plans Section -->
+        <section class="pricing">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Paket Langganan</h2>
+                    <p class="section-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+                </div>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="plan-name">Free</h3>
+                            <div class="plan-price">
+                                <span class="currency">Rp</span>
+                                <span class="amount">0</span>
+                                <span class="period">/bulan</span>
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>5 Apply per bulan</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Akses job board</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Profil dasar</span>
+                            </div>
+                        </div>
+                        <button class="plan-button">Mulai Gratis</button>
+                    </div>
+                    
+                    <div class="pricing-card featured">
+                        <div class="popular-badge">Populer</div>
+                        <div class="pricing-header">
+                            <h3 class="plan-name">Pro</h3>
+                            <div class="plan-price">
+                                <span class="currency">Rp</span>
+                                <span class="amount">99.000</span>
+                                <span class="period">/bulan</span>
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Unlimited Apply</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Prioritas di pencarian</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Analytics mendalam</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Support 24/7</span>
+                            </div>
+                        </div>
+                        <button class="plan-button">Pilih Pro</button>
+                    </div>
+                    
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3 class="plan-name">Enterprise</h3>
+                            <div class="plan-price">
+                                <span class="currency">Rp</span>
+                                <span class="amount">299.000</span>
+                                <span class="period">/bulan</span>
+                            </div>
+                        </div>
+                        <div class="plan-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Semua fitur Pro</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Team management</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>Custom branding</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i>
+                                <span>API access</span>
+                            </div>
+                        </div>
+                        <button class="plan-button">Hubungi Sales</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Pertanyaan yang Sering Diajukan</h2>
+                    <p class="section-subtitle">Temukan jawaban untuk pertanyaan umum tentang JobRescue</p>
+                </div>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Bagaimana cara mendaftar di JobRescue?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Daftar sangat mudah! Klik tombol "Daftar" di pojok kanan atas, isi informasi dasar Anda, verifikasi email, dan lengkapi profil dengan skill dan pengalaman kerja Anda.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Apakah JobRescue benar-benar gratis?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Ya, JobRescue menawarkan paket gratis dengan 5 apply per bulan. Untuk fitur lebih lengkap, kami menyediakan paket Pro dan Enterprise dengan harga terjangkau.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Bagaimana sistem pembayaran bekerja?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>JobRescue menggunakan sistem escrow yang aman. Pembayaran akan ditahan hingga pekerjaan selesai dan disetujui oleh klien. Kami mendukung berbagai metode pembayaran termasuk bank transfer dan e-wallet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Bagaimana jika ada masalah dengan klien?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Tim support kami siap membantu 24/7. Jika ada masalah, Anda bisa menghubungi customer service melalui chat, email, atau telepon. Kami akan mediasi dan mencari solusi terbaik.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Apakah ada jaminan keamanan data?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Keamanan data adalah prioritas utama kami. Semua data dilindungi dengan enkripsi SSL dan kami mengikuti standar keamanan internasional. Data pribadi Anda tidak akan dibagikan ke pihak ketiga.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Kata Mereka Tentang JobRescue</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"JobRescue Bogor membantu saya menemukan pekerjaan part-time yang sesuai dengan jadwal kuliah di IPB. Sangat membantu!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Sarah Putri</h4>
+                                <span>Mahasiswa IPB</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"Sebagai pemilik warung di Pasar Bogor, JobRescue sangat membantu saya menemukan karyawan yang tepat untuk bisnis saya."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Ahmad Wijaya</h4>
+                                <span>Pemilik Warung</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p>"Platform yang sangat cocok untuk warga Bogor yang ingin mencari pekerjaan sampingan atau freelance. Recommended!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="author-info">
+                                <h4>Maya Sari</h4>
+                                <span>Freelancer Bogor</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2 class="newsletter-title">Dapatkan Update Terbaru</h2>
+                        <p class="newsletter-subtitle">Berlangganan newsletter untuk mendapatkan notifikasi pekerjaan terbaru dan tips karir</p>
+                    </div>
+                    <div class="newsletter-form">
+                        <div class="form-group">
+                            <input type="email" placeholder="Masukkan email Anda" class="newsletter-input">
+                            <button class="newsletter-button">
+                                <i class="fas fa-paper-plane"></i>
+                                Berlangganan
+                            </button>
+                        </div>
+                        <p class="newsletter-privacy">Dengan berlangganan, Anda menyetujui <a href="#">Kebijakan Privasi</a> kami</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Hubungi Kami</h2>
+                    <p class="section-subtitle">Ada pertanyaan? Tim support kami siap membantu Anda</p>
+                </div>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Telepon</h3>
+                                <p>+62 21 1234 5678</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>Email</h3>
+                                <p>support@jobrescue.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        <div class="contact-details">
+                            <h3>Alamat</h3>
+                            <p>Jl. Pajajaran No. 123<br>Bogor Tengah 16128</p>
+                        </div>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <form class="form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <input type="text" placeholder="Nama Lengkap" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" placeholder="Email" class="form-input" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Subjek" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Pesan Anda" class="form-textarea" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="form-button">
+                                <i class="fas fa-paper-plane"></i>
+                                Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-check-square"></i>
+                        </div>
+                        <span class="brand-text">JobRescue</span>
+                        <p class="footer-description">Menghubungkan talenta Bogor dengan peluang kerja mikro dan UMKM di Kota Bogor</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4 class="footer-title">Perusahaan</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="#">Karir</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Press</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4 class="footer-title">Untuk Talent</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Cari Kerja</a></li>
+                                <li><a href="#">Cara Kerja</a></li>
+                                <li><a href="#">Tips Sukses</a></li>
+                                <li><a href="#">Komunitas</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4 class="footer-title">Untuk Klien</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Cari Talent</a></li>
+                                <li><a href="#">Posting Job</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Enterprise</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4 class="footer-title">Support</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Bantuan</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Kontak</a></li>
+                                <li><a href="#">Status</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-social">
+                        <h4 class="social-title">Ikuti Kami</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-legal">
+                        <p class="copyright">© 2024 JobRescue. All rights reserved.</p>
+                        <div class="legal-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
