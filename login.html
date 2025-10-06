@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - JobRescue Bogor</title>
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="particles-container" id="particles"></div>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <img src="img/icon.svg" alt="Logo JobRescue">
+                </div>
+                <span class="brand-text">JobRescue</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="#" class="nav-link">Cari Kerja</a></li>
+                <li><a href="cari-talent.html" class="nav-link">Cari Talent</a></li>
+                <li><a href="#" class="nav-link">Tentang</a></li>
+                <li><a href="login.html" class="nav-link" id="navLoginLink">Login</a></li>
+            </ul>
+            <a href="daftar.html" class="btn-register" id="navRegisterBtn">Daftar</a>
+            <div class="hamburger"><span></span><span></span><span></span></div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="hero auth-hero">
+            <canvas class="hero-canvas" id="heroCanvas"></canvas>
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="title-line">Masuk Akun</span>
+                        </h1>
+                        <p class="section-subtitle" style="margin-bottom:1.5rem;">Akses cepat ke job board dan fitur lainnya</p>
+                        <div class="auth-card">
+                            <form class="form" id="loginForm">
+                                <div class="form-group">
+                                    <input type="email" class="form-input" placeholder="" name="email" id="email" required>
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-input" placeholder="" name="password" id="password" required>
+                                    <label for="password">Password</label>
+                                </div>
+                                <button type="submit" class="form-button"><i class="fas fa-sign-in-alt"></i> Login</button>
+                                <p class="newsletter-privacy">Belum punya akun? <a href="daftar.html">Daftar</a></p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="hero-illustration">
+                        <div class="logo-container">
+                            <div class="logo-animation">
+                                <img src="img/icon.svg" alt="JobRescue Logo" class="animated-logo">
+                            </div>
+                            <div class="logo-glow"></div>
+                        </div>
+                        <div class="hero-float-icons" aria-hidden="true"><span class="float-icon icon-briefcase">💼</span><span class="float-icon icon-worker">🧑‍💼</span><span class="float-icon icon-tools">🧰</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/simple-auth.js"></script>
+</body>
+</html>
+
+
