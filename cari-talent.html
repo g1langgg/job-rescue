@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Talent - JobRescue Bogor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <div class="logo-spinner">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span class="loading-text">JobRescue Bogor</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-message">Mencari talent terbaik untuk Anda...</p>
+        </div>
+    </div>
+
+    <!-- Particle Background -->
+    <div class="particles-container" id="particles"></div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <i class="fas fa-check-square"></i>
+                </div>
+                <span class="brand-text">JobRescue</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="#" class="nav-link">Cari Kerja</a></li>
+                <li><a href="#" class="nav-link active">Cari Talent</a></li>
+                <li><a href="#" class="nav-link">Tentang</a></li>
+                <li><a href="#" class="nav-link">Login</a></li>
+            </ul>
+            
+            <button class="btn-register">Daftar</button>
+            
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="talent-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="hero-title">
+                            <span class="title-line">Temukan Talent</span>
+                            <span class="title-line highlight">Terbaik di Bogor</span>
+                            <span class="title-line">untuk UMKM Anda</span>
+                            <span class="rocket">🎯</span>
+                        </h1>
+                        
+                        <p class="hero-subtitle">
+                            Platform terpercaya untuk menemukan karyawan berkualitas dari talenta lokal Bogor
+                        </p>
+                        
+                        <div class="search-container">
+                            <div class="search-box">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" placeholder="Cari berdasarkan skill atau posisi" class="search-input" id="talentSearch">
+                            </div>
+                            <div class="location-box">
+                                <i class="fas fa-map-marker-alt location-icon"></i>
+                                <select class="location-select" id="talentLocation">
+                                    <option value="">Semua area Bogor</option>
+                                    <option value="bogor-tengah">Bogor Tengah</option>
+                                    <option value="bogor-utara">Bogor Utara</option>
+                                    <option value="bogor-selatan">Bogor Selatan</option>
+                                    <option value="bogor-timur">Bogor Timur</option>
+                                    <option value="bogor-barat">Bogor Barat</option>
+                                    <option value="tanah-sareal">Tanah Sareal</option>
+                                </select>
+                            </div>
+                            <button class="search-button">
+                                <i class="fas fa-search"></i>
+                                Cari Talent
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>2,100+</h3>
+                                <p>Talent Terdaftar</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>4.8/5</h3>
+                                <p>Rating Talent</p>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h3>24 Jam</h3>
+                                <p>Waktu Pencarian</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Section -->
+        <section class="talent-filters">
+            <div class="container">
+                <div class="filters-container">
+                    <h3 class="filters-title">Filter Talent</h3>
+                    
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label class="filter-label">Kategori Pekerjaan</label>
+                            <select class="filter-select" id="categoryFilter">
+                                <option value="">Semua Kategori</option>
+                                <option value="retail">Retail & Toko</option>
+                                <option value="kuliner">Kuliner</option>
+                                <option value="pendidikan">Pendidikan</option>
+                                <option value="transportasi">Transportasi</option>
+                                <option value="properti">Properti</option>
+                                <option value="it">IT & Digital</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Pengalaman</label>
+                            <select class="filter-select" id="experienceFilter">
+                                <option value="">Semua Level</option>
+                                <option value="fresh">Fresh Graduate</option>
+                                <option value="junior">Junior (1-2 tahun)</option>
+                                <option value="senior">Senior (3+ tahun)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Tipe Kerja</label>
+                            <select class="filter-select" id="workTypeFilter">
+                                <option value="">Semua Tipe</option>
+                                <option value="fulltime">Full Time</option>
+                                <option value="parttime">Part Time</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="contract">Contract</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Gaji Minimum</label>
+                            <select class="filter-select" id="salaryFilter">
+                                <option value="">Semua Range</option>
+                                <option value="1-2">Rp 1-2 Juta</option>
+                                <option value="2-3">Rp 2-3 Juta</option>
+                                <option value="3-5">Rp 3-5 Juta</option>
+                                <option value="5+">Rp 5+ Juta</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-actions">
+                        <button class="btn-filter" id="applyFilters">
+                            <i class="fas fa-filter"></i>
+                            Terapkan Filter
+                        </button>
+                        <button class="btn-reset" id="resetFilters">
+                            <i class="fas fa-undo"></i>
+                            Reset Filter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Talent Results -->
+        <section class="talent-results">
+            <div class="container">
+                <div class="results-header">
+                    <h2 class="results-title">Talent Tersedia</h2>
+                    <div class="results-count">
+                        <span id="talentCount">156</span> talent ditemukan
+                    </div>
+                </div>
+                
+                <div class="talent-grid" id="talentGrid">
+                    <!-- Talent cards will be populated by JavaScript -->
+                </div>
+                
+                <div class="load-more">
+                    <button class="btn-load-more" id="loadMore">
+                        <i class="fas fa-plus"></i>
+                        Muat Lebih Banyak
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-hire">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Cara Mempekerjakan Talent</h2>
+                    <p class="section-subtitle">Proses sederhana untuk mendapatkan talent terbaik</p>
+                </div>
+                
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Cari & Filter Talent</h3>
+                            <p class="step-description">Gunakan filter untuk menemukan talent yang sesuai dengan kebutuhan Anda</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Lihat Profil & Portofolio</h3>
+                            <p class="step-description">Review profil lengkap, skill, dan pengalaman kerja talent</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-user-circle"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Hubungi & Interview</h3>
+                            <p class="step-description">Hubungi talent langsung dan lakukan interview sesuai kebutuhan</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Rekrut & Mulai Kerja</h3>
+                            <p class="step-description">Tandatangani kontrak dan mulai bekerja sama dengan talent</p>
+                        </div>
+                        <div class="step-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post Job Section -->
+        <section class="post-job">
+            <div class="container">
+                <div class="post-job-content">
+                    <div class="post-job-text">
+                        <h2 class="post-job-title">Tidak Menemukan Talent yang Cocok?</h2>
+                        <p class="post-job-subtitle">Posting lowongan kerja Anda dan biarkan talent yang tepat menemukan Anda</p>
+                    </div>
+                    <div class="post-job-action">
+                        <button class="btn-post-job">
+                            <i class="fas fa-plus-circle"></i>
+                            Posting Lowongan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="logo">
+                            <i class="fas fa-check-square"></i>
+                        </div>
+                        <span class="brand-text">JobRescue</span>
+                        <p class="footer-description">Menghubungkan talenta Bogor dengan peluang kerja mikro dan UMKM di Kota Bogor</p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4 class="footer-title">Perusahaan</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Tentang Kami</a></li>
+                                <li><a href="#">Karir</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Press</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4 class="footer-title">Untuk Talent</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Cari Kerja</a></li>
+                                <li><a href="#">Cara Kerja</a></li>
+                                <li><a href="#">Tips Sukses</a></li>
+                                <li><a href="#">Komunitas</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4 class="footer-title">Untuk Klien</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Cari Talent</a></li>
+                                <li><a href="#">Posting Job</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Enterprise</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4 class="footer-title">Support</h4>
+                            <ul class="footer-list">
+                                <li><a href="#">Bantuan</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Kontak</a></li>
+                                <li><a href="#">Status</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-social">
+                        <h4 class="social-title">Ikuti Kami</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-legal">
+                        <p class="copyright">© 2024 JobRescue Bogor. All rights reserved.</p>
+                        <div class="legal-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="talent-search.js"></script>
+</body>
+</html>
+
