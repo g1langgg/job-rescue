@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JobRescue - Temukan Pekerjaan Mikro & UMKM di Sekitarmu</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
         <div class="loading-content">
             <div class="loading-logo">
                 <div class="logo-spinner">
-                    <i class="fas fa-check-square"></i>
+                    <img src="img/icon.svg" alt="Logo JobRescue">
                 </div>
                 <span class="loading-text">JobRescue</span>
             </div>
@@ -34,7 +35,7 @@
         <nav class="nav">
             <div class="nav-brand">
                 <div class="logo">
-                    <i class="fas fa-check-square"></i>
+                    <img src="img/icon.svg" alt="Logo JobRescue"></i>
                 </div>
                 <span class="brand-text">JobRescue</span>
             </div>
@@ -44,10 +45,10 @@
                 <li><a href="#" class="nav-link">Cari Kerja</a></li>
                 <li><a href="cari-talent.html" class="nav-link">Cari Talent</a></li>
                 <li><a href="#" class="nav-link">Tentang</a></li>
-                <li><a href="#" class="nav-link">Login</a></li>
+                <li><a href="login.html" class="nav-link" id="navLoginLink">Login</a></li>
             </ul>
             
-            <button class="btn-register">Daftar</button>
+            <a href="daftar.html" class="btn-register" id="navRegisterBtn">Daftar</a>
             
             <div class="hamburger">
                 <span></span>
@@ -60,14 +61,13 @@
     <!-- Hero Section -->
     <main class="main">
         <section class="hero">
+            <canvas class="hero-canvas" id="heroCanvas"></canvas>
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-text">
                         <h1 class="hero-title">
                             <span class="title-line">Temukan Pekerjaan</span>
-                            <span class="title-line highlight">Mikro & UMKM</span>
-                            <span class="title-line">di Kota Bogor</span>
-                            <span class="rocket">🚀</span>
+                            <span class="title-line">di Kota Bogor 🚀</span>
                         </h1>
                         
                         <button class="btn-primary">
@@ -123,6 +123,11 @@
                                 <div class="cloud cloud-1"></div>
                                 <div class="cloud cloud-2"></div>
                             </div>
+                        </div>
+                        <div class="hero-float-icons" aria-hidden="true">
+                            <span class="float-icon icon-briefcase" title="Pekerjaan">💼</span>
+                            <span class="float-icon icon-worker" title="Talent">🧑‍💼</span>
+                            <span class="float-icon icon-tools" title="Keahlian">🧰</span>
                         </div>
                     </div>
                 </div>
@@ -739,6 +744,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
