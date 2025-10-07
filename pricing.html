@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paket Langganan - JobRescue</title>
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .pricing-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .pricing-title {
+            font-size: 48px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 16px;
+            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .pricing-subtitle {
+            font-size: 20px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin-bottom: 32px;
+        }
+        
+        .billing-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .billing-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-switch.active {
+            background: #ff6b6b;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(30px);
+        }
+        
+        .discount-badge {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 8px;
+            box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 32px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px 32px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+        
+        .pricing-card.popular {
+            border: 2px solid #ff6b6b;
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+        
+        .popular-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+        }
+        
+        .plan-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: #1e293b;
+            margin-bottom: 16px;
+        }
+        
+        .plan-price {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+        
+        .plan-period {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 32px;
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 40px 0;
+            text-align: left;
+        }
+        
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            font-size: 16px;
+            color: #334155;
+            border-bottom: 1px solid rgba(241, 245, 249, 0.5);
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .feature-icon.check {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+        
+        .feature-icon.star {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+        
+        .plan-button {
+            width: 100%;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .plan-button.free {
+            background: linear-gradient(135deg, #64748b, #475569);
+            color: white;
+        }
+        
+        .plan-button.pro {
+            background: linear-gradient(135deg, #ff6b6b, #ffa726);
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
+        }
+        
+        .plan-button.enterprise {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: white;
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+        }
+        
+        .plan-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        .faq-section {
+            margin-top: 80px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .faq-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .faq-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .faq-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        
+        .faq-question {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+        
+        .faq-answer {
+            font-size: 16px;
+            color: #64748b;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-title {
+                font-size: 36px;
+            }
+            
+            .pricing-subtitle {
+                font-size: 18px;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .pricing-card.popular {
+                transform: none;
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-8px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pricing-container">
+        <div class="pricing-header">
+            <h1 class="pricing-title">Paket Langganan</h1>
+            <p class="pricing-subtitle">Pilih paket yang sesuai dengan kebutuhan Anda</p>
+            
+            <div class="billing-toggle">
+                <span class="billing-label">Bulanan</span>
+                <div class="toggle-switch" id="billingToggle">
+                    <div class="toggle-slider"></div>
+                </div>
+                <span class="billing-label">Tahunan</span>
+                <div class="discount-badge">Hemat 20%</div>
+            </div>
+        </div>
+        
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Free</h3>
+                <div class="plan-price" id="freePrice">Rp 0</div>
+                <div class="plan-period" id="freePeriod">/bulan</div>
+                
+                <ul class="plan-features">
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>5 Apply per bulan</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Akses job board</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Profil dasar</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Notifikasi email</span>
+                    </li>
+                </ul>
+                
+                <button class="plan-button free" onclick="selectPlan('free')">
+                    Mulai Gratis
+                </button>
+            </div>
+            
+            <!-- Pro Plan -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">Populer</div>
+                <h3 class="plan-name">Pro</h3>
+                <div class="plan-price" id="proPrice">Rp 99.000</div>
+                <div class="plan-period" id="proPeriod">/bulan</div>
+                
+                <ul class="plan-features">
+                    <li>
+                        <div class="feature-icon star"><i class="fas fa-star"></i></div>
+                        <span>Unlimited Apply</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Prioritas di pencarian</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Analytics mendalam</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Support 24/7</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>CV Builder Premium</span>
+                    </li>
+                </ul>
+                
+                <button class="plan-button pro" onclick="directUpgrade('pro')">
+                    Upgrade Sekarang
+                </button>
+            </div>
+            
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <h3 class="plan-name">Enterprise</h3>
+                <div class="plan-price" id="enterprisePrice">Rp 299.000</div>
+                <div class="plan-period" id="enterprisePeriod">/bulan</div>
+                
+                <ul class="plan-features">
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Semua fitur Pro</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Team management</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Custom branding</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>API access</span>
+                    </li>
+                    <li>
+                        <div class="feature-icon check"><i class="fas fa-check"></i></div>
+                        <span>Dedicated support</span>
+                    </li>
+                </ul>
+                
+                <button class="plan-button enterprise" onclick="directUpgrade('enterprise')">
+                    Upgrade Sekarang
+                </button>
+            </div>
+        </div>
+        
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h2 class="faq-title">Pertanyaan yang Sering Diajukan</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 class="faq-question">Bagaimana cara membatalkan langganan?</h3>
+                    <p class="faq-answer">Anda dapat membatalkan langganan kapan saja melalui halaman profil. Tidak ada biaya pembatalan atau komitmen jangka panjang.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Apakah ada masa percobaan gratis?</h3>
+                    <p class="faq-answer">Ya! Paket Pro dan Enterprise memiliki masa percobaan 14 hari gratis. Anda dapat mencoba semua fitur premium tanpa biaya.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Bagaimana cara upgrade atau downgrade paket?</h3>
+                    <p class="faq-answer">Upgrade dapat dilakukan kapan saja dan akan berlaku langsung. Downgrade akan berlaku pada periode billing berikutnya.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <h3 class="faq-question">Metode pembayaran apa saja yang tersedia?</h3>
+                    <p class="faq-answer">Kami menerima pembayaran melalui kartu kredit/debit, transfer bank, e-wallet (GoPay, OVO, DANA), dan virtual account.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/simple-auth.js"></script>
+    <script>
+        // Pricing data
+        const pricingData = {
+            monthly: {
+                free: { price: 'Rp 0', period: '/bulan' },
+                pro: { price: 'Rp 99.000', period: '/bulan' },
+                enterprise: { price: 'Rp 299.000', period: '/bulan' }
+            },
+            yearly: {
+                free: { price: 'Rp 0', period: '/tahun' },
+                pro: { price: 'Rp 950.000', period: '/tahun', original: 'Rp 1.188.000' },
+                enterprise: { price: 'Rp 2.870.000', period: '/tahun', original: 'Rp 3.588.000' }
+            }
+        };
+        
+        let isYearly = false;
+        
+        // Initialize pricing page
+        document.addEventListener('DOMContentLoaded', function() {
+            initializePricing();
+            setupBillingToggle();
+        });
+        
+        function initializePricing() {
+            // Check if user is logged in
+            fetch('api/auth.php?action=me', { credentials: 'include' })
+                .then(r => r.json())
+                .then(res => {
+                    if (!res.user) {
+                        // Not logged in, redirect to login
+                        window.location.href = 'login.html';
+                    }
+                })
+                .catch(() => {
+                    window.location.href = 'login.html';
+                });
+        }
+        
+        function setupBillingToggle() {
+            const toggle = document.getElementById('billingToggle');
+            toggle.addEventListener('click', function() {
+                isYearly = !isYearly;
+                toggle.classList.toggle('active', isYearly);
+                updatePricing();
+            });
+        }
+        
+        function updatePricing() {
+            const currentData = isYearly ? pricingData.yearly : pricingData.monthly;
+            
+            // Update Free plan
+            document.getElementById('freePrice').textContent = currentData.free.price;
+            document.getElementById('freePeriod').textContent = currentData.free.period;
+            
+            // Update Pro plan
+            document.getElementById('proPrice').textContent = currentData.pro.price;
+            document.getElementById('proPeriod').textContent = currentData.pro.period;
+            
+            // Update Enterprise plan
+            document.getElementById('enterprisePrice').textContent = currentData.enterprise.price;
+            document.getElementById('enterprisePeriod').textContent = currentData.enterprise.period;
+            
+            // Show/hide discount badges
+            const discountBadges = document.querySelectorAll('.discount-badge');
+            discountBadges.forEach(badge => {
+                if (isYearly) {
+                    badge.style.display = 'inline-block';
+                } else {
+                    badge.style.display = 'none';
+                }
+            });
+        }
+        
+        function selectPlan(planType) {
+            // Check if user is logged in
+            fetch('api/auth.php?action=me', { credentials: 'include' })
+                .then(r => r.json())
+                .then(res => {
+                    if (!res.user) {
+                        alert('Silakan login terlebih dahulu untuk berlangganan.');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    
+                    handlePlanSelection(planType, res.user);
+                })
+                .catch(() => {
+                    alert('Silakan login terlebih dahulu untuk berlangganan.');
+                    window.location.href = 'login.html';
+                });
+        }
+        
+        function directUpgrade(planType) {
+            // Check if user is logged in
+            fetch('api/auth.php?action=me', { credentials: 'include' })
+                .then(r => r.json())
+                .then(res => {
+                    if (!res.user) {
+                        alert('Silakan login terlebih dahulu untuk upgrade.');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    
+                    // Direct to payment process
+                    showDirectPayment(planType, res.user);
+                })
+                .catch(() => {
+                    alert('Silakan login terlebih dahulu untuk upgrade.');
+                    window.location.href = 'login.html';
+                });
+        }
+        
+        function handlePlanSelection(planType, user) {
+            if (planType === 'free') {
+                // Free plan - just show success message
+                alert('Selamat! Anda sekarang menggunakan paket Free. Nikmati fitur-fitur dasar JobRescue!');
+                updateUserSubscription(planType);
+            } else if (planType === 'pro') {
+                // Pro plan - show payment options
+                showPaymentModal(planType, user);
+            } else if (planType === 'enterprise') {
+                // Enterprise plan - redirect to contact sales
+                showContactSalesModal();
+            }
+        }
+        
+        function showPaymentModal(planType, user) {
+            const planName = planType === 'pro' ? 'Pro' : 'Enterprise';
+            const price = isYearly ? 
+                (planType === 'pro' ? 'Rp 950.000/tahun' : 'Rp 2.870.000/tahun') :
+                (planType === 'pro' ? 'Rp 99.000/bulan' : 'Rp 299.000/bulan');
+            
+            // Create modern payment modal
+            createPaymentModal(planType, planName, price, user);
+        }
+        
+        function createPaymentModal(planType, planName, price, user) {
+            // Remove existing modal if any
+            const existingModal = document.getElementById('paymentModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Create modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.id = 'paymentModal';
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            // Create modal content
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 20px;
+                padding: 32px;
+                max-width: 500px;
+                width: 90%;
+                max-height: 80vh;
+                overflow-y: auto;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                animation: slideUp 0.3s ease;
+                position: relative;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 24px;">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                        <i class="fas fa-credit-card" style="color: white; font-size: 24px;"></i>
+                    </div>
+                    <h2 style="margin: 0 0 8px; color: #1e293b; font-size: 24px; font-weight: 700;">Pilih Metode Pembayaran</h2>
+                    <p style="margin: 0; color: #64748b; font-size: 16px;">Paket ${planName} - ${price}</p>
+                </div>
+                
+                <div style="display: grid; gap: 12px; margin-bottom: 24px;">
+                    <div class="payment-option" data-method="card" style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #3b82f6, #1d4ed8); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-credit-card" style="color: white; font-size: 18px;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Kartu Kredit/Debit</div>
+                            <div style="font-size: 14px; color: #64748b;">Visa, Mastercard, JCB</div>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+                    
+                    <div class="payment-option" data-method="bank" style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-university" style="color: white; font-size: 18px;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Transfer Bank</div>
+                            <div style="font-size: 14px; color: #64748b;">BCA, Mandiri, BNI, BRI</div>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+                    
+                    <div class="payment-option" data-method="ewallet" style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-mobile-alt" style="color: white; font-size: 18px;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">E-wallet</div>
+                            <div style="font-size: 14px; color: #64748b;">GoPay, OVO, DANA, LinkAja</div>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+                    
+                    <div class="payment-option" data-method="va" style="display: flex; align-items: center; gap: 16px; padding: 16px; border: 2px solid #e2e8f0; border-radius: 12px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #8b5cf6, #7c3aed); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-qrcode" style="color: white; font-size: 18px;"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 600; color: #1e293b; margin-bottom: 4px;">Virtual Account</div>
+                            <div style="font-size: 14px; color: #64748b;">Pembayaran otomatis</div>
+                        </div>
+                        <i class="fas fa-chevron-right" style="color: #94a3b8;"></i>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 12px;">
+                    <button id="cancelPayment" style="flex: 1; padding: 12px; border: 1px solid #e2e8f0; background: white; color: #64748b; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        Batal
+                    </button>
+                </div>
+                
+                <style>
+                    @keyframes fadeIn {
+                        from { opacity: 0; }
+                        to { opacity: 1; }
+                    }
+                    @keyframes slideUp {
+                        from { transform: translateY(30px); opacity: 0; }
+                        to { transform: translateY(0); opacity: 1; }
+                    }
+                    .payment-option:hover {
+                        border-color: #667eea !important;
+                        transform: translateY(-2px);
+                        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.15);
+                    }
+                    .payment-option.selected {
+                        border-color: #667eea !important;
+                        background: rgba(102, 126, 234, 0.05);
+                    }
+                    #cancelPayment:hover {
+                        background: #f8fafc;
+                        border-color: #cbd5e1;
+                    }
+                </style>
+            `;
+            
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+            
+            // Add event listeners
+            const paymentOptions = modalContent.querySelectorAll('.payment-option');
+            const cancelBtn = modalContent.querySelector('#cancelPayment');
+            
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove previous selection
+                    paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                    
+                    // Add selection to clicked option
+                    this.classList.add('selected');
+                    
+                    // Get selected method
+                    const method = this.getAttribute('data-method');
+                    const methodNames = {
+                        'card': 'Kartu Kredit/Debit',
+                        'bank': 'Transfer Bank',
+                        'ewallet': 'E-wallet',
+                        'va': 'Virtual Account'
+                    };
+                    
+                    // Show confirmation
+                    setTimeout(() => {
+                        showPaymentConfirmation(planType, planName, price, methodNames[method], user);
+                    }, 300);
+                });
+            });
+            
+            cancelBtn.addEventListener('click', function() {
+                modalOverlay.remove();
+            });
+            
+            // Close on overlay click
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    modalOverlay.remove();
+                }
+            });
+        }
+        
+        function showPaymentConfirmation(planType, planName, price, method, user) {
+            // Remove payment modal
+            const paymentModal = document.getElementById('paymentModal');
+            if (paymentModal) {
+                paymentModal.remove();
+            }
+            
+            // Create confirmation modal
+            const modalOverlay = document.createElement('div');
+            modalOverlay.id = 'confirmModal';
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 20px;
+                padding: 32px;
+                max-width: 400px;
+                width: 90%;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                animation: slideUp 0.3s ease;
+                text-align: center;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
+                    <i class="fas fa-check" style="color: white; font-size: 24px;"></i>
+                </div>
+                <h2 style="margin: 0 0 16px; color: #1e293b; font-size: 20px; font-weight: 700;">Konfirmasi Pembayaran</h2>
+                <div style="background: #f8fafc; border-radius: 12px; padding: 20px; margin-bottom: 24px; text-align: left;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #64748b;">Paket:</span>
+                        <span style="font-weight: 600; color: #1e293b;">${planName}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span style="color: #64748b;">Harga:</span>
+                        <span style="font-weight: 600; color: #1e293b;">${price}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: #64748b;">Metode:</span>
+                        <span style="font-weight: 600; color: #1e293b;">${method}</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button id="cancelConfirm" style="flex: 1; padding: 12px; border: 1px solid #e2e8f0; background: white; color: #64748b; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        Batal
+                    </button>
+                    <button id="confirmPayment" style="flex: 1; padding: 12px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                        Lanjutkan
+                    </button>
+                </div>
+            `;
+            
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+            
+            // Add event listeners
+            const cancelBtn = modalContent.querySelector('#cancelConfirm');
+            const confirmBtn = modalContent.querySelector('#confirmPayment');
+            
+            cancelBtn.addEventListener('click', function() {
+                modalOverlay.remove();
+            });
+            
+            confirmBtn.addEventListener('click', function() {
+                modalOverlay.remove();
+                simulatePayment(planType, method, user);
+            });
+            
+            // Close on overlay click
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === modalOverlay) {
+                    modalOverlay.remove();
+                }
+            });
+        }
+        
+        function simulatePayment(planType, method, user) {
+            // Show loading
+            const button = event.target;
+            const originalText = button.textContent;
+            button.textContent = 'Memproses...';
+            button.disabled = true;
+            
+            // Simulate payment processing delay
+            setTimeout(() => {
+                // Simulate successful payment
+                const success = Math.random() > 0.1; // 90% success rate
+                
+                if (success) {
+                    alert(`Pembayaran berhasil!\n\nPaket ${planType.toUpperCase()} telah diaktifkan.\nTerima kasih telah berlangganan JobRescue!`);
+                    updateUserSubscription(planType);
+                } else {
+                    alert('Pembayaran gagal. Silakan coba lagi atau gunakan metode pembayaran lain.');
+                }
+                
+                // Reset button
+                button.textContent = originalText;
+                button.disabled = false;
+            }, 2000);
+        }
+        
+        function showDirectPayment(planType, user) {
+            const planName = planType === 'pro' ? 'Pro' : 'Enterprise';
+            const price = isYearly ? 
+                (planType === 'pro' ? 'Rp 950.000/tahun' : 'Rp 2.870.000/tahun') :
+                (planType === 'pro' ? 'Rp 99.000/bulan' : 'Rp 299.000/bulan');
+            
+            // Show payment modal directly
+            showPaymentModal(planType, user);
+        }
+        
+        function showContactSalesModal() {
+            const contactInfo = `
+Hubungi Tim Sales Enterprise:
+
+📧 Email: enterprise@jobrescue.com
+📞 Telepon: (021) 1234-5678
+💬 WhatsApp: +62 812-3456-7890
+
+Atau isi form di bawah ini:
+            `;
+            
+            const name = prompt('Nama lengkap:');
+            if (!name) return;
+            
+            const company = prompt('Nama perusahaan:');
+            if (!company) return;
+            
+            const email = prompt('Email perusahaan:');
+            if (!email) return;
+            
+            const phone = prompt('Nomor telepon:');
+            if (!phone) return;
+            
+            const message = prompt('Pesan tambahan (opsional):') || '';
+            
+            alert(`Terima kasih ${name}!\n\nTim sales kami akan menghubungi Anda dalam 24 jam untuk membahas paket Enterprise yang sesuai dengan kebutuhan ${company}.\n\nDetail kontak:\nEmail: ${email}\nTelepon: ${phone}`);
+        }
+        
+        function updateUserSubscription(planType) {
+            // Store subscription info in localStorage
+            const subscription = {
+                plan: planType,
+                startDate: new Date().toISOString(),
+                isYearly: isYearly,
+                status: 'active'
+            };
+            
+            localStorage.setItem('jr_user_subscription', JSON.stringify(subscription));
+            
+            // Update user profile if on profile page
+            if (window.location.pathname.includes('profile.html')) {
+                // Refresh profile page to show updated subscription
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                // Redirect to profile page
+                setTimeout(() => {
+                    window.location.href = 'profile.html';
+                }, 1000);
+            }
+        }
+        
+        // Add some interactive effects
+        document.querySelectorAll('.pricing-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = this.classList.contains('popular') ? 
+                    'scale(1.05) translateY(-8px)' : 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = this.classList.contains('popular') ? 
+                    'scale(1.05)' : 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

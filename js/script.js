@@ -100,11 +100,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return isValid;
     }
     
-    // Loading Screen Animation
-    const loadingScreen = document.getElementById('loadingScreen');
+    // Loading Screen Animation (with safety fallback)
+    const loadingScreens = Array.from(document.querySelectorAll('#loadingScreen, .loading-screen'));
     const loadingProgress = document.querySelector('.loading-progress');
     
-    // Simulate loading progress
     let progress = 0;
     const loadingInterval = setInterval(() => {
         progress += Math.random() * 15;
@@ -112,14 +111,42 @@ document.addEventListener('DOMContentLoaded', function() {
             progress = 100;
             clearInterval(loadingInterval);
             setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none';
-                }, 500);
+                loadingScreens.forEach(ls => {
+                    if (ls) {
+                        ls.classList.add('hidden');
+                        setTimeout(() => { ls.style.display = 'none'; }, 500);
+                    }
+                });
             }, 500);
         }
-        loadingProgress.style.width = progress + '%';
+        if (loadingProgress) {
+            loadingProgress.style.width = progress + '%';
+        }
     }, 100);
+    
+    // Hard safety: force-hide loader after 5s regardless
+    setTimeout(() => {
+        loadingScreens.forEach(ls => {
+            if (ls && ls.style.display !== 'none') {
+                clearInterval(loadingInterval);
+                ls.classList.add('hidden');
+                setTimeout(() => { ls.style.display = 'none'; }, 500);
+            }
+        });
+    }, 5000);
+
+    // Smooth scroll for nav anchors
+    document.querySelectorAll('.nav .nav-link[href^="#"]').forEach(function(link){
+        link.addEventListener('click', function(e){
+            const targetId = link.getAttribute('href');
+            if(targetId === '#top') return; // top behaves normally
+            const target = document.querySelector(targetId);
+            if(target){
+                e.preventDefault();
+                window.scrollTo({ top: target.offsetTop - 70, behavior: 'smooth' });
+            }
+        });
+    });
     
     // Create Particle System
     function createParticles() {

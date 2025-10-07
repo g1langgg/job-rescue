@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access - JobRescue</title>
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+        }
+        .admin-access-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 90%;
+        }
+        .admin-access-container h1 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+        .admin-access-container p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        .admin-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(255, 107, 107, 0.4);
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.5);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #ffc107;
+        }
+        .warning i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-access-container">
+        <h1><i class="fas fa-shield-alt"></i> Admin Access</h1>
+        
+        <div class="warning">
+            <i class="fas fa-exclamation-triangle"></i>
+            <strong>Akses Terbatas:</strong> Halaman ini hanya untuk administrator sistem JobRescue.
+        </div>
+        
+        <p>
+            Jika Anda adalah administrator JobRescue, silakan klik tombol di bawah untuk mengakses panel admin.
+        </p>
+        
+        <a href="admin-login.html" class="admin-btn">
+            <i class="fas fa-sign-in-alt"></i> Login Admin
+        </a>
+        
+        <br>
+        
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+        </a>
+        
+        <div style="margin-top: 30px; color: rgba(255, 255, 255, 0.6); font-size: 0.9rem;">
+            <p><strong>Kredensial Admin:</strong></p>
+            <p>Email: admin@jobrescue.local</p>
+            <p>Password: admin123</p>
+        </div>
+    </div>
+</body>
+</html>

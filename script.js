@@ -1134,18 +1134,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add CSS for revealed elements
-const revealStyle = document.createElement('style');
-revealStyle.textContent = `
-    .hero-text, .hero-illustration, .feature-card, .testimonial-card {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    
-    .hero-text.revealed, .hero-illustration.revealed, .feature-card.revealed, .testimonial-card.revealed {
-        opacity: 1;
-        transform: translateY(0);
-    }
+
     
     .feature-card:nth-child(1).revealed {
         transition-delay: 0.1s;
@@ -1167,4 +1156,7 @@ revealStyle.textContent = `
         transition-delay: 0.2s;
     }
 `;
-document.head.appendChild(revealStyle);
+
+    // Tambahkan style ke head
+    document.head.appendChild(revealStyle);
+});

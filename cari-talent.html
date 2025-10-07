@@ -1,31 +1,16 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cari Talent - JobRescue Bogor</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-content">
-            <div class="loading-logo">
-                <div class="logo-spinner">
-                    <i class="fas fa-users"></i>
-                </div>
-                <span class="loading-text">JobRescue Bogor</span>
-            </div>
-            <div class="loading-bar">
-                <div class="loading-progress"></div>
-            </div>
-            <p class="loading-message">Mencari talent terbaik untuk Anda...</p>
-        </div>
-    </div>
-
+    
     <!-- Particle Background -->
     <div class="particles-container" id="particles"></div>
 
@@ -39,15 +24,16 @@
                 <span class="brand-text">JobRescue</span>
             </div>
             
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html" class="nav-link">Beranda</a></li>
                 <li><a href="#" class="nav-link">Cari Kerja</a></li>
                 <li><a href="#" class="nav-link active">Cari Talent</a></li>
                 <li><a href="#" class="nav-link">Tentang</a></li>
-                <li><a href="#" class="nav-link">Login</a></li>
+                <li><a href="admin-login.html" class="nav-link" id="navAdminLink" style="display:none;">Admin</a></li>
+                <li><a href="login.html" class="nav-link" id="navLoginLink">Login</a></li>
             </ul>
             
-            <button class="btn-register">Daftar</button>
+            <a href="daftar.html" class="btn-register" id="navRegisterBtn">Daftar</a>
             
             <div class="hamburger">
                 <span></span>
@@ -297,6 +283,20 @@
                 </div>
             </div>
         </section>
+
+        <!-- Job Listings (dynamic) -->
+        <section class="talent-results" id="jobListingsSection">
+            <div class="container">
+                <div class="results-header">
+                    <h2 class="results-title">Lowongan Terbaru</h2>
+                    <div class="results-count">
+                        <span id="jobCount">0</span> lowongan aktif
+                    </div>
+                </div>
+                <div class="talent-grid" id="jobList"></div>
+                <p id="jobEmptyState" style="text-align:center; color: rgba(255,255,255,0.8); display:none;">Belum ada lowongan. Klik "Posting Lowongan" untuk menambahkan.</p>
+            </div>
+        </section>
     </main>
 
     <!-- Footer -->
@@ -388,60 +388,6 @@
                 </div>
             </div>
         </div>
-    </footer>
-
-    <script src="script.js"></script>
-    <script src="talent-search.js"></script>
-</body>
-</html>
-
-=======
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cari Talent - JobRescue Bogor</title>
-    <link rel="icon" type="image/png" href="img/favicon.svg">
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-</head>
-<body>
-    
-    <!-- Particle Background -->
-    <div class="particles-container" id="particles"></div>
-
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-brand">
-                <div class="logo">
-                    <i class="fas fa-check-square"></i>
-                </div>
-                <span class="brand-text">JobRescue</span>
-            </div>
-            
-            <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Beranda</a></li>
-                <li><a href="#" class="nav-link">Cari Kerja</a></li>
-                <li><a href="#" class="nav-link active">Cari Talent</a></li>
-                <li><a href="#" class="nav-link">Tentang</a></li>
-                <li><a href="#" class="nav-link">Login</a></li>
-            </ul>
-            
-            <button class="btn-register">Daftar</button>
-            
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content -->
-    <main class="main">
         <!-- Hero Section -->
         <section class="talent-hero">
             <div class="container">
@@ -772,7 +718,7 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/simple-auth.js"></script>
     <script src="js/talent-search.js"></script>
 </body>
 </html>
->>>>>>> 620c5cb52bcdebcbac645335c8fadaf1dcce5c3c

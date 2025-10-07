@@ -573,17 +573,31 @@ document.addEventListener('DOMContentLoaded', function() {
                 <i class="fas fa-plus-circle"></i>
             </div>
             <h3 style="margin-bottom: 1rem; font-size: 1.8rem;">Posting Lowongan Kerja</h3>
-            <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">Buat lowongan kerja untuk menarik talent terbaik di Bogor. Tim kami akan membantu mempromosikan lowongan Anda.</p>
-            <div style="display: flex; gap: 1rem; justify-content: center;">
-                <button onclick="this.closest('div').remove()" 
-                        style="background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
-                    Nanti
-                </button>
-                <button onclick="this.closest('div').remove()" 
-                        style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; padding: 0.8rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
-                    Buat Lowongan
-                </button>
-            </div>
+            <p style="margin-bottom: 1.5rem; opacity: 0.8; line-height: 1.6;">Isi form berikut. Lowongan akan tersimpan di browser Anda dan tampil di daftar "Lowongan Terbaru".</p>
+            <form id="postJobForm" style="text-align:left; display:grid; gap:0.8rem;">
+                <label>Judul Pekerjaan<input required name="title" style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#fff;"></label>
+                <label>Perusahaan / UMKM<input required name="company" style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#fff;"></label>
+                <label>Lokasi<select name="location" required style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#fff;">
+                    <option value="Bogor Tengah">Bogor Tengah</option>
+                    <option value="Bogor Utara">Bogor Utara</option>
+                    <option value="Bogor Selatan">Bogor Selatan</option>
+                    <option value="Bogor Timur">Bogor Timur</option>
+                    <option value="Bogor Barat">Bogor Barat</option>
+                    <option value="Tanah Sareal">Tanah Sareal</option>
+                </select></label>
+                <label>Tipe Kerja<select name="type" required style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#fff;">
+                    <option>Full Time</option>
+                    <option>Part Time</option>
+                    <option>Freelance</option>
+                    <option>Contract</option>
+                </select></label>
+                <label>Kisaran Gaji<input name="salary" placeholder="Contoh: 3-5 juta" style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#fff;"></label>
+                <label>Deskripsi<textarea required name="description" rows="4" style="width:100%; padding:0.8rem; border-radius:12px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:#fff;"></textarea></label>
+                <div style="display:flex; gap:0.8rem; justify-content:flex-end; margin-top:0.5rem;">
+                    <button type="button" id="cancelPostJob" style="background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.2); padding: 0.8rem 1.5rem; border-radius: 10px; cursor: pointer; font-weight: 600;">Batal</button>
+                    <button type="submit" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 10px; cursor: pointer; font-weight: 600;">Simpan</button>
+                </div>
+            </form>
         `;
         
         modal.appendChild(modalContent);
@@ -599,7 +613,78 @@ document.addEventListener('DOMContentLoaded', function() {
                 modal.remove();
             }
         });
+
+        // form handlers
+        const form = modalContent.querySelector('#postJobForm');
+        const cancelBtn = modalContent.querySelector('#cancelPostJob');
+        cancelBtn.addEventListener('click', () => modal.remove());
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            const fd = new FormData(form);
+            const job = {
+                id: Date.now(),
+                title: (fd.get('title')||'').toString().trim(),
+                company: (fd.get('company')||'').toString().trim(),
+                location: fd.get('location'),
+                type: fd.get('type'),
+                salary: (fd.get('salary')||'').toString().trim(),
+                description: (fd.get('description')||'').toString().trim()
+            };
+            if(!job.title || !job.company || !job.description){ return; }
+            const STORAGE_KEY = 'jr_jobs';
+            const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            list.unshift(job);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+            renderJobs();
+            modal.remove();
+            showToast('Lowongan tersimpan.');
+        });
     }
+
+    // render job listings
+    function renderJobs(){
+        const STORAGE_KEY = 'jr_jobs';
+        const container = document.getElementById('jobList');
+        const countEl = document.getElementById('jobCount');
+        const emptyEl = document.getElementById('jobEmptyState');
+        if(!container) return;
+        const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+        countEl && (countEl.textContent = list.length);
+        container.innerHTML = '';
+        if(list.length === 0){ if(emptyEl) emptyEl.style.display = 'block'; return; }
+        if(emptyEl) emptyEl.style.display = 'none';
+        list.slice(0,8).forEach(job => {
+            const card = document.createElement('div');
+            card.className = 'talent-card';
+            card.innerHTML = `
+                <div class="talent-header">
+                    <div class="talent-avatar">💼</div>
+                    <div class="talent-info">
+                        <h3>${job.title}</h3>
+                        <div class="talent-title">${job.company}</div>
+                        <div class="talent-rating"><span class="rating-text">${job.location} · ${job.type}</span></div>
+                    </div>
+                </div>
+                <div class="talent-details">
+                    <div class="detail-item"><i class="fas fa-dollar-sign"></i><span>${job.salary || 'Negosiasi'}</span></div>
+                </div>
+                <p style="color: rgba(255,255,255,0.85); line-height:1.5;">${job.description}</p>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function showToast(text){
+        const t = document.createElement('div');
+        t.style.cssText = 'position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#16a34a; color:#fff; padding:10px 16px; border-radius:12px; z-index:3000; box-shadow:0 10px 25px rgba(0,0,0,.2)';
+        t.textContent = text;
+        document.body.appendChild(t);
+        setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity .3s'; }, 1500);
+        setTimeout(()=> t.remove(), 2000);
+    }
+
+    // initial job render
+    renderJobs();
     
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');

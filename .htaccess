@@ -1,0 +1,23 @@
+# Protect admin access
+<Files "admin-login.html">
+    # Allow access to admin login page
+</Files>
+
+<Files "admin.html">
+    # Allow access to admin panel
+</Files>
+
+<Files "admin-access.html">
+    # Allow access to admin access page
+</Files>
+
+# Redirect admin access to special URL
+RewriteEngine On
+RewriteRule ^admin$ admin-access.html [L]
+
+# Security headers
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options nosniff
+    Header always set X-Frame-Options DENY
+    Header always set X-XSS-Protection "1; mode=block"
+</IfModule>

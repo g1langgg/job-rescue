@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - JobRescue</title>
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <style>
+        /* Background */
+        body { background: radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,0.08), transparent 60%), linear-gradient(180deg, #5b72f2 0%, #6d5bd6 50%, #5a49c8 100%); }
+        /* Scoped admin styles */
+        .admin-wrap { max-width: none; width: 100%; margin: 0 auto; padding: 28px 28px; }
+        .admin-header { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:14px; }
+        .admin-actions { display:flex; gap:10px; }
+        .card { background: rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.14); border-radius:18px; overflow:hidden; backdrop-filter: blur(10px); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+        .tabs { display:flex; gap:6px; padding:8px; background: rgba(255,255,255,0.04); border-bottom:1px solid rgba(255,255,255,0.08); }
+        .tab { padding:10px 14px; border-radius:12px; background: transparent; color:#fff; border:1px solid transparent; cursor:pointer; transition: all .2s ease; }
+        .tab:hover { background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.18); transform: translateY(-1px); }
+        .tab.active { background: linear-gradient(135deg, rgba(255,255,255,0.22), rgba(255,255,255,0.12)); border-color: rgba(255,255,255,0.24); box-shadow: inset 0 1px 0 rgba(255,255,255,.25); }
+        .stat-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:14px; }
+        .stat-card { background: rgba(255,255,255,0.10); border:1px solid rgba(255,255,255,0.16); border-radius:14px; padding:16px; box-shadow: inset 0 1px 0 rgba(255,255,255,.15); }
+        .stat-card .stat-num { font-size: 1.8rem; font-weight: 800; margin-top: 6px; letter-spacing: .3px; }
+        .table { width:100%; }
+        table.admin-table { width:100%; border-collapse: collapse; }
+        table.admin-table th, table.admin-table td { padding:12px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.08); }
+        table.admin-table thead th { font-weight:700; color:#f3f4f6; background: rgba(255,255,255,0.06); position: sticky; top:0; backdrop-filter: blur(6px); }
+        .badge { background:#1f6feb; color:#fff; padding:6px 12px; border-radius:999px; font-size:.85rem; box-shadow: 0 6px 16px rgba(31,111,235,.35); }
+        .btn-primary { background: linear-gradient(135deg, #ff7e33, #ff5e62); color:#fff; border:none; padding:10px 14px; border-radius:12px; cursor:pointer; box-shadow: 0 10px 24px rgba(255,94,98,.35); transition: transform .12s ease; }
+        .btn-secondary { background: rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.22); padding:10px 14px; border-radius:12px; cursor:pointer; transition: transform .12s ease; }
+        .btn-ghost { background: transparent; color:#fff; border:1px solid rgba(255,255,255,0.22); padding:8px 10px; border-radius:10px; cursor:pointer; }
+        .btn-primary:hover, .btn-secondary:hover { transform: translateY(-1px); }
+        .row-actions { display:flex; gap:8px; }
+        @media (max-width: 900px) { .stat-grid { grid-template-columns: 1fr; } }
+    </style>
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo"><i class="fas fa-check-square"></i></div>
+                <span class="brand-text">JobRescue Admin</span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="#" class="nav-link active">Admin</a></li>
+            </ul>
+            <a href="#" class="btn-register" id="adminLogoutBtn">Keluar</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <section class="admin-wrap" style="display:grid; grid-template-columns: 260px 1fr; gap:20px; align-items:start;">
+            <aside class="card" style="position:sticky; top:16px; height:fit-content; padding:12px;">
+                <div style="display:flex; align-items:center; gap:10px; padding:8px 10px; border-bottom:1px solid rgba(255,255,255,0.08); margin-bottom:6px;">
+                    <div style="width:36px; height:36px; border-radius:50%; background:rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center;">👤</div>
+                    <div>
+                        <div style="font-weight:700;" id="adminName">Administrator</div>
+                        <div style="opacity:.7; font-size:.9rem;" id="adminEmail">admin@jobrescue</div>
+                    </div>
+                </div>
+                <nav style="display:grid; gap:6px;">
+                    <button class="btn-secondary tab active" data-tab="overview" id="sdbOverview" style="text-align:left;">🏠 Dashboard</button>
+                    <button class="btn-secondary tab" data-tab="jobs" id="sdbJobs" style="text-align:left;">💼 Jobs</button>
+                    <button class="btn-secondary tab" data-tab="users" id="sdbUsers" style="text-align:left;">👥 Users</button>
+                </nav>
+            </aside>
+            <div class="admin-header" style="grid-column: 2 / span 1;">
+                <h1 style="font-size:1.8rem; margin:0;">Dashboard Admin</h1>
+                <div class="admin-actions">
+                    <button id="btnAddJob" class="btn-primary" style="display:inline-flex; align-items:center; gap:8px;">
+                        <i class="fas fa-plus"></i> Tambah Lowongan
+                    </button>
+                    <button id="btnClearAll" class="btn-secondary" style="display:inline-flex; align-items:center; gap:8px;">
+                        <i class="fas fa-trash"></i> Hapus Semua
+                    </button>
+                </div>
+            </div>
+
+            <div class="card" style="margin-top:1rem; grid-column: 2 / span 1; width:100%;">
+                <div class="tabs">
+                    <button class="tab active" data-tab="overview" id="tabOverview">Overview</button>
+                    <button class="tab" data-tab="jobs" id="tabJobs">Jobs</button>
+                    <button class="tab" data-tab="users" id="tabUsers">Users</button>
+                </div>
+                <div id="viewOverview" style="padding:1rem;">
+                    <div class="stat-grid">
+                        <div class="stat-card"><div>Total Jobs</div><div id="ovJobs" class="stat-num">0</div></div>
+                        <div class="stat-card"><div>Total Users</div><div id="ovUsers" class="stat-num">0</div></div>
+                        <div class="stat-card"><div>Last Update</div><div id="ovUpdated" class="stat-num">-</div></div>
+                    </div>
+                </div>
+                <div id="viewJobs" style="display:none; padding:1rem;">
+                    <div class="card-header" style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                        <h3 style="margin:0;">Lowongan Tersimpan</h3>
+                        <span id="adminJobCount" class="badge">0</span>
+                    </div>
+                    <div class="table" style="overflow:auto;">
+                        <table class="admin-table" id="adminJobsTable">
+                            <thead><tr><th>Judul</th><th>Perusahaan</th><th>Lokasi</th><th>Tipe</th><th>Aksi</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div id="viewUsers" style="display:none; padding:1rem;">
+                    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                        <h3 style="margin:0;">Pengguna Terdaftar</h3>
+                        <button id="btnAddUser" class="btn-primary"><i class="fas fa-user-plus"></i> Tambah User</button>
+                    </div>
+                    <div class="table" style="overflow:auto;">
+                        <table class="admin-table" id="adminUsersTable">
+                            <thead><tr><th>Nama</th><th>Email</th><th>Role</th><th>Aksi</th></tr></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="js/admin-auth.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
+
