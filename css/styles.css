@@ -2587,6 +2587,260 @@ html {
     background: transparent;
 }
 
+/* Job Listings Section - White Background */
+#jobListingsSection {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Adjust text colors for white background in job listings */
+#jobListingsSection .results-title {
+    color: #1f2937;
+    text-shadow: none;
+}
+
+#jobListingsSection .results-count {
+    color: #4b5563;
+}
+
+#jobListingsSection .talent-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+#jobListingsSection .talent-card:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+#jobListingsSection .talent-info h3 {
+    color: #1f2937;
+}
+
+#jobListingsSection .talent-info .talent-title {
+    color: #4b5563;
+}
+
+#jobListingsSection .talent-rating .rating-text {
+    color: #6b7280;
+}
+
+#jobListingsSection .talent-skills h4 {
+    color: #1f2937;
+}
+
+#jobListingsSection .detail-item {
+    color: #4b5563;
+}
+
+#jobListingsSection .btn-view-profile {
+    background: rgba(0, 0, 0, 0.05);
+    color: #1f2937;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#jobListingsSection .btn-view-profile:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+#jobListingsSection .btn-load-more {
+    background: rgba(0, 0, 0, 0.05);
+    color: #1f2937;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+#jobListingsSection .btn-load-more:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+#jobListingsSection #jobEmptyState {
+    color: #6b7280;
+}
+
+/* Talent Cards - White Background */
+.talent-results:not(#jobListingsSection) .talent-card {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.talent-results:not(#jobListingsSection) .talent-card:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.talent-results:not(#jobListingsSection) .talent-info h3 {
+    color: #1f2937;
+}
+
+.talent-results:not(#jobListingsSection) .talent-info .talent-title {
+    color: #4b5563;
+}
+
+.talent-results:not(#jobListingsSection) .talent-rating .rating-text {
+    color: #6b7280;
+}
+
+.talent-results:not(#jobListingsSection) .talent-skills h4 {
+    color: #1f2937;
+}
+
+.talent-results:not(#jobListingsSection) .detail-item {
+    color: #4b5563;
+}
+
+.talent-results:not(#jobListingsSection) .btn-view-profile {
+    background: #ffffff;
+    color: #1f2937;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.talent-results:not(#jobListingsSection) .btn-view-profile:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+}
+
+.talent-results:not(#jobListingsSection) .btn-load-more {
+    background: #ffffff;
+    color: #1f2937;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.talent-results:not(#jobListingsSection) .btn-load-more:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+    transform: translateY(-3px);
+}
+
+/* Tentang Page - Section Backgrounds */
+/* Cerita Kami Section - White Background */
+.tentang .features {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Adjust text colors for white background in Cerita Kami */
+.tentang .features .section-title {
+    color: #1f2937;
+    text-shadow: none;
+}
+
+.tentang .features .section-subtitle {
+    color: #4b5563;
+}
+
+.tentang .features .feature-card {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.tentang .features .feature-card:hover {
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.tentang .features .feature-title {
+    color: #1f2937;
+}
+
+.tentang .features .feature-subtitle {
+    color: #4b5563;
+}
+
+.tentang .features .feature-description {
+    color: #4b5563;
+}
+
+/* Misi & Visi Section - Hero Gradient Background */
+.tentang .testimonials {
+    background: transparent;
+}
+
+.tentang .testimonials .section-title {
+    color: white !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    font-weight: 800;
+}
+
+.tentang .testimonials .section-subtitle {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tentang .testimonials .testimonial-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tentang .testimonials .testimonial-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.tentang .testimonials .testimonial-content h3 {
+    color: white;
+}
+
+.tentang .testimonials .testimonial-content p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.tentang .testimonials .section-header .section-title {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+    background: none !important;
+}
+
+/* Talent Detail Background - Match Theme */
+.talent-results:not(#jobListingsSection) .talent-details {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.talent-results:not(#jobListingsSection) .talent-skills {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.talent-results:not(#jobListingsSection) .talent-skills h4 {
+    color: white;
+    margin-bottom: 0.8rem;
+}
+
+.talent-results:not(#jobListingsSection) .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.talent-results:not(#jobListingsSection) .skill-tag {
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    border: none;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+}
+
+
 .results-header {
     display: flex;
     justify-content: space-between;
@@ -2972,5 +3226,123 @@ html {
     100% {
         opacity: 0.8;
         transform: scale(1.1);
+    }
+}
+
+/* ====================
+   User Menu Styles
+   ==================== */
+.user-menu {
+    position: relative;
+    margin-left: 1rem;
+    z-index: 1000;
+    display: none; /* Hidden by default, shown when user is logged in */
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.user-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    width: 250px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1001;
+    overflow: hidden;
+}
+
+.user-menu:hover .user-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.user-info {
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #f97316, #ea580c);
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.user-email {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    color: #4b5563;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item i {
+    margin-right: 0.75rem;
+    width: 20px;
+    text-align: center;
+    color: #9ca3af;
+}
+
+.dropdown-item:hover {
+    background-color: #f9fafb;
+    color: #f97316;
+}
+
+.dropdown-item:hover i {
+    color: #f97316;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .user-menu {
+        margin-left: 0.5rem;
+    }
+    
+    .user-dropdown {
+        position: fixed;
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 80px;
+        border-radius: 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
 }
