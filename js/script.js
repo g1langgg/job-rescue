@@ -906,13 +906,26 @@ document.addEventListener('DOMContentLoaded', function() {
             color: white;
         `;
         
+        // Determine the category page URL
+        const categoryMap = {
+            'Kuliner Bogor': 'kuliner',
+            'Retail & Toko': 'retail',
+            'Pendidikan': 'pendidikan',
+            'Transportasi': 'transportasi',
+            'Properti': 'properti',
+            'IT & Digital': 'it'
+        };
+        
+        const categoryKey = categoryMap[categoryName];
+        let categoryUrl = categoryKey ? `kategori.html?cat=${categoryKey}` : 'cari-kerja.html';
+        
         modalContent.innerHTML = `
             <h3 style="margin-bottom: 1rem; font-size: 1.5rem;">Kategori: ${categoryName}</h3>
             <p style="margin-bottom: 2rem; opacity: 0.8; line-height: 1.6;">
                 Jelajahi ribuan pekerjaan dalam kategori ${categoryName}. Temukan peluang yang sesuai dengan keahlian Anda.
             </p>
-            <button onclick="this.closest('div').remove()" 
-                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600;">
+            <button onclick="window.location.href='${categoryUrl}'" 
+                    style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; border: none; padding: 1rem 2rem; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s ease;">
                 Jelajahi Pekerjaan
             </button>
         `;

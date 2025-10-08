@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span id=\"accountName\">Akun</span>
                     </button>
                     <div id=\"accountMenu\" style=\"position:absolute; right:0; top:110%; display:none; background: rgba(255,255,255,0.98); border-radius:12px; border:1px solid rgba(0,0,0,0.08); box-shadow:0 10px 25px rgba(0,0,0,0.15); min-width: 180px; overflow:hidden;\">
-                        <a href=\"profile.html\" style=\"display:block; padding:0.8rem 1rem; color:#1f2937; text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.05);\"><i class=\"fas fa-user\" style=\"margin-right:8px;\"></i>Profil Saya</a>
+                        <a href=\"profil.html\" style=\"display:block; padding:0.8rem 1rem; color:#1f2937; text-decoration:none; border-bottom:1px solid rgba(0,0,0,0.05);\"><i class=\"fas fa-user\" style=\"margin-right:8px;\"></i>Profil Saya</a>
                         <a href=\"#\" id=\"btnLogout\" style=\"display:block; padding:0.8rem 1rem; color:#1f2937; text-decoration:none;\"><i class=\"fas fa-sign-out-alt\" style=\"margin-right:8px;\"></i>Keluar</a>
                     </div>`;
                 const nav = document.querySelector('.nav');
@@ -51,7 +51,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (registerBtn) registerBtn.style.display = 'none';
                 account.style.display = 'block';
                 const nameEl = account.querySelector('#accountName');
-                nameEl.textContent = (user.name || 'Akun').split(' ')[0];
+                
+                // Check if user has PRO subscription
+                const subscription = JSON.parse(localStorage.getItem('jr_user_subscription') || 'null');
+                const isPro = subscription && subscription.status === 'active';
+                
+                if (isPro) {
+                    nameEl.innerHTML = `${(user.name || 'Akun').split(' ')[0]} <span style="display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; background: linear-gradient(135deg, #fbbf24, #f59e0b); color: white; font-size: 10px; font-weight: 700; border-radius: 10px; margin-left: 6px;"><i class="fas fa-crown" style="font-size: 10px;"></i>PRO</span>`;
+                } else {
+                    nameEl.textContent = (user.name || 'Akun').split(' ')[0];
+                }
             } else {
                 if (loginLink) loginLink.style.display = '';
                 if (registerBtn) registerBtn.style.display = '';

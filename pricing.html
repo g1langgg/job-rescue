@@ -887,10 +887,20 @@
                 const success = Math.random() > 0.1; // 90% success rate
                 
                 if (success) {
-                    alert(`Pembayaran berhasil!\n\nPaket ${planType.toUpperCase()} telah diaktifkan.\nTerima kasih telah berlangganan JobRescue!`);
+                    // Close payment modal
+                    const paymentModal = document.getElementById('paymentModal');
+                    if (paymentModal) paymentModal.remove();
+                    
+                    // Show success modal
+                    showSuccessModal(planType);
                     updateUserSubscription(planType);
                 } else {
-                    alert('Pembayaran gagal. Silakan coba lagi atau gunakan metode pembayaran lain.');
+                    // Close payment modal
+                    const paymentModal = document.getElementById('paymentModal');
+                    if (paymentModal) paymentModal.remove();
+                    
+                    // Show error modal
+                    showErrorModal();
                 }
                 
                 // Reset button
@@ -949,7 +959,7 @@ Atau isi form di bawah ini:
             localStorage.setItem('jr_user_subscription', JSON.stringify(subscription));
             
             // Update user profile if on profile page
-            if (window.location.pathname.includes('profile.html')) {
+            if (window.location.pathname.includes('profil.html')) {
                 // Refresh profile page to show updated subscription
                 setTimeout(() => {
                     window.location.reload();
@@ -957,9 +967,178 @@ Atau isi form di bawah ini:
             } else {
                 // Redirect to profile page
                 setTimeout(() => {
-                    window.location.href = 'profile.html';
+                    window.location.href = 'profil.html';
                 }, 1000);
             }
+        }
+        
+        function showSuccessModal(planType) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10001;
+                animation: fadeIn 0.4s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 24px;
+                padding: 48px 40px;
+                max-width: 500px;
+                width: 90%;
+                text-align: center;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                animation: successPop 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                position: relative;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="position: relative; margin-bottom: 24px;">
+                    <div style="width: 120px; height: 120px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto; box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4); animation: checkmarkBounce 0.8s ease 0.3s;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="animation: checkmarkDraw 0.6s ease 0.5s both;">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                    </div>
+                    <div style="position: absolute; top: -20px; left: 50%; transform: translateX(-50%); animation: confetti 1s ease;">
+                        <span style="font-size: 40px;">🎉</span>
+                    </div>
+                </div>
+                
+                <h2 style="margin: 0 0 16px; color: #1e293b; font-size: 32px; font-weight: 800; animation: slideDown 0.5s ease 0.4s both;">Pembayaran Berhasil!</h2>
+                
+                <div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+                    <p style="margin: 0 0 12px; color: #166534; font-size: 18px; font-weight: 600;">
+                        Paket ${planType.toUpperCase()} telah diaktifkan
+                    </p>
+                    <p style="margin: 0; color: #15803d; font-size: 15px; line-height: 1.6;">
+                        Terima kasih telah berlangganan JobRescue!
+                    </p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #eff6ff, #dbeafe); border-radius: 12px; padding: 16px; margin-bottom: 24px;">
+                    <p style="margin: 0; color: #1e40af; font-size: 14px; font-weight: 600;">
+                        ✨ Anda sekarang dapat menikmati semua fitur premium
+                    </p>
+                </div>
+                
+                <button id="closeSuccessModal" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);">
+                    <i class="fas fa-check-circle" style="margin-right: 8px;"></i>Lanjutkan
+                </button>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes successPop {
+                    0% { transform: scale(0.5); opacity: 0; }
+                    50% { transform: scale(1.05); }
+                    100% { transform: scale(1); opacity: 1; }
+                }
+                @keyframes checkmarkBounce {
+                    0%, 100% { transform: scale(1); }
+                    50% { transform: scale(1.1); }
+                }
+                @keyframes checkmarkDraw {
+                    0% { stroke-dasharray: 0, 100; }
+                    100% { stroke-dasharray: 100, 0; }
+                }
+                @keyframes slideDown {
+                    from { transform: translateY(-20px); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                @keyframes confetti {
+                    0% { transform: translateX(-50%) translateY(0) rotate(0deg); opacity: 1; }
+                    100% { transform: translateX(-50%) translateY(-100px) rotate(360deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.getElementById('closeSuccessModal').addEventListener('click', () => {
+                modal.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => modal.remove(), 300);
+            });
+        }
+        
+        function showErrorModal() {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10001;
+                animation: fadeIn 0.3s ease;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 24px;
+                padding: 40px;
+                max-width: 450px;
+                width: 90%;
+                text-align: center;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+                animation: shake 0.5s ease;
+            `;
+            
+            modalContent.innerHTML = `
+                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #ef4444, #dc2626); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; box-shadow: 0 20px 40px rgba(239, 68, 68, 0.4);">
+                    <i class="fas fa-times" style="color: white; font-size: 48px;"></i>
+                </div>
+                
+                <h2 style="margin: 0 0 16px; color: #1e293b; font-size: 28px; font-weight: 800;">Pembayaran Gagal</h2>
+                
+                <div style="background: linear-gradient(135deg, #fef2f2, #fee2e2); border-radius: 16px; padding: 20px; margin-bottom: 24px;">
+                    <p style="margin: 0; color: #991b1b; font-size: 16px; line-height: 1.6;">
+                        Maaf, pembayaran Anda tidak dapat diproses. Silakan coba lagi atau gunakan metode pembayaran lain.
+                    </p>
+                </div>
+                
+                <button id="closeErrorModal" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(239, 68, 68, 0.3);">
+                    <i class="fas fa-redo" style="margin-right: 8px;"></i>Coba Lagi
+                </button>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    25% { transform: translateX(-10px); }
+                    75% { transform: translateX(10px); }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; }
+                    to { opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.getElementById('closeErrorModal').addEventListener('click', () => {
+                modal.style.animation = 'fadeOut 0.3s ease';
+                setTimeout(() => modal.remove(), 300);
+            });
         }
         
         // Add some interactive effects

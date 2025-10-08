@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuliner Bogor - JobRescue</title>
+    <link rel="icon" type="image/png" href="img/favicon.svg">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .category-hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.95), rgba(118, 75, 162, 0.95));
+            padding: 120px 0 80px;
+            text-align: center;
+            color: white;
+        }
+        
+        .category-icon {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 48px;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .category-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+        
+        .category-description {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .jobs-container {
+            max-width: 1200px;
+            margin: -40px auto 80px;
+            padding: 0 24px;
+        }
+        
+        .filters-bar {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 20px;
+            align-items: start;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+        
+        .job-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+        
+        .job-content {
+            flex: 1;
+        }
+        
+        .job-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .job-company {
+            font-size: 16px;
+            color: #64748b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .job-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        
+        .job-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            color: #64748b;
+        }
+        
+        .job-meta-item i {
+            color: #667eea;
+        }
+        
+        .job-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+        
+        .job-tag {
+            padding: 6px 12px;
+            background: #f1f5f9;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #475569;
+            font-weight: 500;
+        }
+        
+        .job-actions {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .btn-apply {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-apply:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-save {
+            padding: 12px 20px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-save:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .salary-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .no-jobs {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 16px;
+        }
+        
+        .no-jobs i {
+            font-size: 64px;
+            color: #cbd5e1;
+            margin-bottom: 16px;
+        }
+        
+        .no-jobs h3 {
+            font-size: 24px;
+            color: #334155;
+            margin-bottom: 8px;
+        }
+        
+        .no-jobs p {
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-brand">
+                <div class="logo">
+                    <img src="img/icon.svg" alt="Logo JobRescue">
+                </div>
+                <span class="brand-text">JobRescue</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Beranda</a></li>
+                <li><a href="cari-kerja.html" class="nav-link active">Cari Kerja</a></li>
+                <li><a href="cari-talent.html" class="nav-link">Cari Talent</a></li>
+                <li><a href="tentang.html" class="nav-link">Tentang</a></li>
+            </ul>
+            
+            <a href="login.html" class="btn-register">Login</a>
+        </nav>
+    </header>
+
+    <!-- Category Hero -->
+    <section class="category-hero">
+        <div class="container">
+            <div class="category-icon">
+                🍜
+            </div>
+            <h1 class="category-title">Kuliner Bogor</h1>
+            <p class="category-description">
+                Jelajahi ribuan pekerjaan dalam kategori Kuliner Bogor. Temukan peluang yang sesuai dengan keahlian Anda.
+            </p>
+        </div>
+    </section>
+
+    <!-- Jobs Section -->
+    <div class="jobs-container">
+        <!-- Filters -->
+        <div class="filters-bar">
+            <div class="filter-group">
+                <label class="filter-label">Tipe Pekerjaan</label>
+                <select class="filter-select" id="jobTypeFilter">
+                    <option value="">Semua Tipe</option>
+                    <option value="fulltime">Full Time</option>
+                    <option value="parttime">Part Time</option>
+                    <option value="freelance">Freelance</option>
+                    <option value="contract">Contract</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Pengalaman</label>
+                <select class="filter-select" id="experienceFilter">
+                    <option value="">Semua Level</option>
+                    <option value="entry">Entry Level</option>
+                    <option value="mid">Mid Level</option>
+                    <option value="senior">Senior Level</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label class="filter-label">Gaji</label>
+                <select class="filter-select" id="salaryFilter">
+                    <option value="">Semua Gaji</option>
+                    <option value="0-5">< Rp 5 Juta</option>
+                    <option value="5-10">Rp 5-10 Juta</option>
+                    <option value="10-20">Rp 10-20 Juta</option>
+                    <option value="20+">> Rp 20 Juta</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Job Listings -->
+        <div id="jobListings">
+            <!-- Jobs will be loaded here -->
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script>
+        // Sample job data for Kuliner Bogor category
+        const jobs = [
+            {
+                id: 1,
+                title: 'Chef de Partie',
+                company: 'The Peak Restaurant Bogor',
+                location: 'Bogor Tengah',
+                type: 'Full Time',
+                experience: 'Mid Level',
+                salary: 'Rp 6.000.000 - 8.000.000',
+                tags: ['Masakan Indonesia', 'Western Food', 'Kitchen Management'],
+                icon: '👨‍🍳',
+                posted: '2 hari yang lalu'
+            },
+            {
+                id: 2,
+                title: 'Barista',
+                company: 'Kopi Kenangan Bogor',
+                location: 'Bogor Utara',
+                type: 'Full Time',
+                experience: 'Entry Level',
+                salary: 'Rp 4.500.000 - 5.500.000',
+                tags: ['Coffee Making', 'Customer Service', 'Latte Art'],
+                icon: '☕',
+                posted: '1 hari yang lalu'
+            },
+            {
+                id: 3,
+                title: 'Pastry Chef',
+                company: 'Bogor Bakery House',
+                location: 'Bogor Selatan',
+                type: 'Full Time',
+                experience: 'Mid Level',
+                salary: 'Rp 7.000.000 - 9.000.000',
+                tags: ['Baking', 'Cake Decoration', 'Recipe Development'],
+                icon: '🍰',
+                posted: '3 hari yang lalu'
+            },
+            {
+                id: 4,
+                title: 'Waiter/Waitress',
+                company: 'Restoran Sunda Bogor',
+                location: 'Bogor Barat',
+                type: 'Full Time',
+                experience: 'Entry Level',
+                salary: 'Rp 3.500.000 - 4.500.000',
+                tags: ['Customer Service', 'Food Service', 'Communication'],
+                icon: '🍽️',
+                posted: '1 hari yang lalu'
+            },
+            {
+                id: 5,
+                title: 'Kitchen Supervisor',
+                company: 'Hotel Salak The Heritage',
+                location: 'Bogor Tengah',
+                type: 'Full Time',
+                experience: 'Senior Level',
+                salary: 'Rp 8.000.000 - 12.000.000',
+                tags: ['Leadership', 'Kitchen Operations', 'Quality Control'],
+                icon: '👨‍🍳',
+                posted: '5 hari yang lalu'
+            },
+            {
+                id: 6,
+                title: 'Commis Chef',
+                company: 'Grand Garden Cafe',
+                location: 'Bogor Timur',
+                type: 'Full Time',
+                experience: 'Entry Level',
+                salary: 'Rp 4.000.000 - 5.000.000',
+                tags: ['Food Preparation', 'Cooking', 'Hygiene'],
+                icon: '🔪',
+                posted: '2 hari yang lalu'
+            },
+            {
+                id: 7,
+                title: 'Restaurant Manager',
+                company: 'Bogor Food Court',
+                location: 'Bogor Utara',
+                type: 'Full Time',
+                experience: 'Senior Level',
+                salary: 'Rp 10.000.000 - 15.000.000',
+                tags: ['Management', 'Operations', 'Staff Training'],
+                icon: '📊',
+                posted: '4 hari yang lalu'
+            },
+            {
+                id: 8,
+                title: 'Sushi Chef',
+                company: 'Sushi Tei Bogor',
+                location: 'Bogor Tengah',
+                type: 'Full Time',
+                experience: 'Mid Level',
+                salary: 'Rp 7.500.000 - 10.000.000',
+                tags: ['Japanese Cuisine', 'Sushi Making', 'Knife Skills'],
+                icon: '🍣',
+                posted: '3 hari yang lalu'
+            }
+        ];
+
+        function renderJobs(jobsToRender = jobs) {
+            const container = document.getElementById('jobListings');
+            
+            if (jobsToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="no-jobs">
+                        <i class="fas fa-search"></i>
+                        <h3>Tidak Ada Pekerjaan Ditemukan</h3>
+                        <p>Coba ubah filter pencarian Anda</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = jobsToRender.map(job => `
+                <div class="job-card">
+                    <div class="job-logo">${job.icon}</div>
+                    <div class="job-content">
+                        <h3 class="job-title">${job.title}</h3>
+                        <div class="job-company">
+                            <i class="fas fa-building"></i>
+                            ${job.company}
+                        </div>
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${job.location}
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                ${job.type}
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-layer-group"></i>
+                                ${job.experience}
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-clock"></i>
+                                ${job.posted}
+                            </div>
+                        </div>
+                        <div class="job-tags">
+                            ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('')}
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                            <div class="salary-badge">
+                                <i class="fas fa-money-bill-wave"></i>
+                                ${job.salary}
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn-save" onclick="saveJob(${job.id})">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                                <a href="#" class="btn-apply" onclick="applyJob(${job.id}); return false;">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Lamar Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterJobs() {
+            const jobType = document.getElementById('jobTypeFilter').value;
+            const experience = document.getElementById('experienceFilter').value;
+            const salary = document.getElementById('salaryFilter').value;
+            
+            let filtered = jobs;
+            
+            if (jobType) {
+                filtered = filtered.filter(job => 
+                    job.type.toLowerCase().replace(' ', '') === jobType
+                );
+            }
+            
+            if (experience) {
+                filtered = filtered.filter(job => 
+                    job.experience.toLowerCase().includes(experience)
+                );
+            }
+            
+            renderJobs(filtered);
+        }
+
+        function saveJob(jobId) {
+            alert('Pekerjaan berhasil disimpan! Anda dapat melihatnya di halaman profil.');
+        }
+
+        function applyJob(jobId) {
+            const job = jobs.find(j => j.id === jobId);
+            if (confirm(`Lamar pekerjaan ${job.title} di ${job.company}?`)) {
+                alert('Lamaran berhasil dikirim! Tim HRD akan menghubungi Anda segera.');
+            }
+        }
+
+        // Event listeners for filters
+        document.getElementById('jobTypeFilter').addEventListener('change', filterJobs);
+        document.getElementById('experienceFilter').addEventListener('change', filterJobs);
+        document.getElementById('salaryFilter').addEventListener('change', filterJobs);
+
+        // Initial render
+        renderJobs();
+    </script>
+</body>
+</html>
