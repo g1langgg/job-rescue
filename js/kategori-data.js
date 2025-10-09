@@ -449,7 +449,13 @@ const category = categoryData[categoryKey] || categoryData['kuliner'];
 
 // Update page title and meta
 document.getElementById('pageTitle').textContent = `${category.name} - JobRescue`;
-document.getElementById('categoryIcon').textContent = category.icon;
+// Only set emoji icon if no <i> font-awesome icon is already present
+const categoryIconEl = document.getElementById('categoryIcon');
+if (categoryIconEl) {
+    if (!categoryIconEl.querySelector('i')) {
+        categoryIconEl.textContent = category.icon;
+    }
+}
 document.getElementById('categoryTitle').textContent = category.name;
 document.getElementById('categoryDescription').textContent = category.description;
 
@@ -470,7 +476,7 @@ function renderJobs(jobsToRender = category.jobs) {
     
     container.innerHTML = jobsToRender.map(job => `
         <div class="job-card">
-            <div class="job-logo">${job.icon}</div>
+            <div class="job-logo">${job.logoUrl ? `<img src="${job.logoUrl}" alt="${job.title}">` : job.icon}</div>
             <div class="job-content">
                 <h3 class="job-title">${job.title}</h3>
                 <div class="job-company">
@@ -508,7 +514,7 @@ function renderJobs(jobsToRender = category.jobs) {
                             <i class="far fa-bookmark"></i>
                         </button>
                         <a href="#" class="btn-apply" onclick="applyJob(${job.id}); return false;">
-                            <i class="fas fa-paper-plane"></i>
+                            <i class="fas fa-bag-shopping"></i>
                             Lamar Sekarang
                         </a>
                     </div>

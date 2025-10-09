@@ -217,10 +217,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateHeader() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        if (scrollTop > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        // Only update header if it exists
+        if (header) {
+            if (scrollTop > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
         
         // Parallax effect for particles

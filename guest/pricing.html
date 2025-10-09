@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paket Langganan - JobRescue</title>
-    <link rel="icon" type="image/png" href="img/favicon.svg">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" type="image/png" href="../img/favicon.svg">
+    <link rel="stylesheet" href="../css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -478,7 +478,8 @@
         </div>
     </div>
     
-    <script src="js/simple-auth.js"></script>
+    <script src="../js/modal-helper.js"></script>
+    <script src="../js/simple-auth.js"></script>
     <script>
         // Pricing data
         const pricingData = {
@@ -552,49 +553,49 @@
             });
         }
         
-        function selectPlan(planType) {
+        async function selectPlan(planType) {
             // Check if user is logged in
-            fetch('api/auth.php?action=me', { credentials: 'include' })
-                .then(r => r.json())
-                .then(res => {
-                    if (!res.user) {
-                        alert('Silakan login terlebih dahulu untuk berlangganan.');
-                        window.location.href = 'login.html';
-                        return;
-                    }
-                    
-                    handlePlanSelection(planType, res.user);
-                })
-                .catch(() => {
-                    alert('Silakan login terlebih dahulu untuk berlangganan.');
+            try {
+                const r = await fetch('api/auth.php?action=me', { credentials: 'include' });
+                const res = await r.json();
+                
+                if (!res.user) {
+                    await showAlert('Silakan login terlebih dahulu untuk berlangganan.', 'Login Diperlukan', 'warning');
                     window.location.href = 'login.html';
-                });
+                    return;
+                }
+                
+                handlePlanSelection(planType, res.user);
+            } catch {
+                await showAlert('Silakan login terlebih dahulu untuk berlangganan.', 'Login Diperlukan', 'warning');
+                window.location.href = 'login.html';
+            }
         }
         
-        function directUpgrade(planType) {
+        async function directUpgrade(planType) {
             // Check if user is logged in
-            fetch('api/auth.php?action=me', { credentials: 'include' })
-                .then(r => r.json())
-                .then(res => {
-                    if (!res.user) {
-                        alert('Silakan login terlebih dahulu untuk upgrade.');
-                        window.location.href = 'login.html';
-                        return;
-                    }
-                    
-                    // Direct to payment process
-                    showDirectPayment(planType, res.user);
-                })
-                .catch(() => {
-                    alert('Silakan login terlebih dahulu untuk upgrade.');
+            try {
+                const r = await fetch('api/auth.php?action=me', { credentials: 'include' });
+                const res = await r.json();
+                
+                if (!res.user) {
+                    await showAlert('Silakan login terlebih dahulu untuk upgrade.', 'Login Diperlukan', 'warning');
                     window.location.href = 'login.html';
-                });
+                    return;
+                }
+                
+                // Direct to payment process
+                showDirectPayment(planType, res.user);
+            } catch {
+                await showAlert('Silakan login terlebih dahulu untuk upgrade.', 'Login Diperlukan', 'warning');
+                window.location.href = 'login.html';
+            }
         }
         
-        function handlePlanSelection(planType, user) {
+        async function handlePlanSelection(planType, user) {
             if (planType === 'free') {
                 // Free plan - just show success message
-                alert('Selamat! Anda sekarang menggunakan paket Free. Nikmati fitur-fitur dasar JobRescue!');
+                await showAlert('Selamat! Anda sekarang menggunakan paket Free. Nikmati fitur-fitur dasar JobRescue!', 'Berhasil', 'success');
                 updateUserSubscription(planType);
             } else if (planType === 'pro') {
                 // Pro plan - show payment options
@@ -919,7 +920,7 @@
             showPaymentModal(planType, user);
         }
         
-        function showContactSalesModal() {
+        async function showContactSalesModal() {
             const contactInfo = `
 Hubungi Tim Sales Enterprise:
 
@@ -930,21 +931,21 @@ Hubungi Tim Sales Enterprise:
 Atau isi form di bawah ini:
             `;
             
-            const name = prompt('Nama lengkap:');
+            const name = await showPrompt('Nama lengkap:', '', 'Contact Sales');
             if (!name) return;
             
-            const company = prompt('Nama perusahaan:');
+            const company = await showPrompt('Nama perusahaan:', '', 'Contact Sales');
             if (!company) return;
             
-            const email = prompt('Email perusahaan:');
+            const email = await showPrompt('Email perusahaan:', '', 'Contact Sales');
             if (!email) return;
             
-            const phone = prompt('Nomor telepon:');
+            const phone = await showPrompt('Nomor telepon:', '', 'Contact Sales');
             if (!phone) return;
             
-            const message = prompt('Pesan tambahan (opsional):') || '';
+            const message = await showPrompt('Pesan tambahan (opsional):', '', 'Contact Sales') || '';
             
-            alert(`Terima kasih ${name}!\n\nTim sales kami akan menghubungi Anda dalam 24 jam untuk membahas paket Enterprise yang sesuai dengan kebutuhan ${company}.\n\nDetail kontak:\nEmail: ${email}\nTelepon: ${phone}`);
+            await showAlert(`Terima kasih ${name}!\n\nTim sales kami akan menghubungi Anda dalam 24 jam untuk membahas paket Enterprise yang sesuai dengan kebutuhan ${company}.\n\nDetail kontak:\nEmail: ${email}\nTelepon: ${phone}`, 'Permintaan Diterima', 'success');
         }
         
         function updateUserSubscription(planType) {

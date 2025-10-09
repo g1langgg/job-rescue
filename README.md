@@ -1,2 +1,0 @@
-# job-rescue
-materi lomba

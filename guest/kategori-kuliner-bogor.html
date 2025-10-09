@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="pageTitle">Kategori Pekerjaan - JobRescue</title>
-    <link rel="icon" type="image/png" href="img/favicon.svg">
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Kuliner Bogor - JobRescue</title>
+    <link rel="icon" type="image/png" href="../img/favicon.svg">
+    <link rel="stylesheet" href="../css/styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -264,7 +264,7 @@
         <nav class="nav">
             <div class="nav-brand">
                 <div class="logo">
-                    <img src="img/icon.svg" alt="Logo JobRescue">
+                    <img src="../img/icon.svg" alt="Logo JobRescue">
                 </div>
                 <span class="brand-text">JobRescue</span>
             </div>
@@ -283,12 +283,12 @@
     <!-- Category Hero -->
     <section class="category-hero">
         <div class="container">
-            <div class="category-icon" id="categoryIcon">
+            <div class="category-icon">
                 🍜
             </div>
-            <h1 class="category-title" id="categoryTitle">Kategori Pekerjaan</h1>
-            <p class="category-description" id="categoryDescription">
-                Jelajahi ribuan pekerjaan dalam kategori ini. Temukan peluang yang sesuai dengan keahlian Anda.
+            <h1 class="category-title">Kuliner Bogor</h1>
+            <p class="category-description">
+                Jelajahi ribuan pekerjaan dalam kategori Kuliner Bogor. Temukan peluang yang sesuai dengan keahlian Anda.
             </p>
         </div>
     </section>
@@ -336,7 +336,212 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
-    <script src="js/kategori-data.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+        // Sample job data for Kuliner Bogor category
+        const jobs = [
+            {
+                id: 1,
+                title: 'Chef de Partie',
+                company: 'The Peak Restaurant Bogor',
+                location: 'Bogor Tengah',
+                type: 'Full Time',
+                experience: 'Mid Level',
+                salary: 'Rp 6.000.000 - 8.000.000',
+                tags: ['Masakan Indonesia', 'Western Food', 'Kitchen Management'],
+                icon: '👨‍🍳',
+                posted: '2 hari yang lalu'
+            },
+            {
+                id: 2,
+                title: 'Barista',
+                company: 'Kopi Kenangan Bogor',
+                location: 'Bogor Utara',
+                type: 'Full Time',
+                experience: 'Entry Level',
+                salary: 'Rp 4.500.000 - 5.500.000',
+                tags: ['Coffee Making', 'Customer Service', 'Latte Art'],
+                icon: '☕',
+                posted: '1 hari yang lalu'
+            },
+            {
+                id: 3,
+                title: 'Pastry Chef',
+                company: 'Bogor Bakery House',
+                location: 'Bogor Selatan',
+                type: 'Full Time',
+                experience: 'Mid Level',
+                salary: 'Rp 7.000.000 - 9.000.000',
+                tags: ['Baking', 'Cake Decoration', 'Recipe Development'],
+                icon: '🍰',
+                posted: '3 hari yang lalu'
+            },
+            {
+                id: 4,
+                title: 'Waiter/Waitress',
+                company: 'Restoran Sunda Bogor',
+                location: 'Bogor Barat',
+                type: 'Full Time',
+                experience: 'Entry Level',
+                salary: 'Rp 3.500.000 - 4.500.000',
+                tags: ['Customer Service', 'Food Service', 'Communication'],
+                icon: '🍽️',
+                posted: '1 hari yang lalu'
+            },
+            {
+                id: 5,
+                title: 'Kitchen Supervisor',
+                company: 'Hotel Salak The Heritage',
+                location: 'Bogor Tengah',
+                type: 'Full Time',
+                experience: 'Senior Level',
+                salary: 'Rp 8.000.000 - 12.000.000',
+                tags: ['Leadership', 'Kitchen Operations', 'Quality Control'],
+                icon: '👨‍🍳',
+                posted: '5 hari yang lalu'
+            },
+            {
+                id: 6,
+                title: 'Commis Chef',
+                company: 'Grand Garden Cafe',
+                location: 'Bogor Timur',
+                type: 'Full Time',
+                experience: 'Entry Level',
+                salary: 'Rp 4.000.000 - 5.000.000',
+                tags: ['Food Preparation', 'Cooking', 'Hygiene'],
+                icon: '🔪',
+                posted: '2 hari yang lalu'
+            },
+            {
+                id: 7,
+                title: 'Restaurant Manager',
+                company: 'Bogor Food Court',
+                location: 'Bogor Utara',
+                type: 'Full Time',
+                experience: 'Senior Level',
+                salary: 'Rp 10.000.000 - 15.000.000',
+                tags: ['Management', 'Operations', 'Staff Training'],
+                icon: '📊',
+                posted: '4 hari yang lalu'
+            },
+            {
+                id: 8,
+                title: 'Sushi Chef',
+                company: 'Sushi Tei Bogor',
+                location: 'Bogor Tengah',
+                type: 'Full Time',
+                experience: 'Mid Level',
+                salary: 'Rp 7.500.000 - 10.000.000',
+                tags: ['Japanese Cuisine', 'Sushi Making', 'Knife Skills'],
+                icon: '🍣',
+                posted: '3 hari yang lalu'
+            }
+        ];
+
+        function renderJobs(jobsToRender = jobs) {
+            const container = document.getElementById('jobListings');
+            
+            if (jobsToRender.length === 0) {
+                container.innerHTML = `
+                    <div class="no-jobs">
+                        <i class="fas fa-search"></i>
+                        <h3>Tidak Ada Pekerjaan Ditemukan</h3>
+                        <p>Coba ubah filter pencarian Anda</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = jobsToRender.map(job => `
+                <div class="job-card">
+                    <div class="job-logo">${job.icon}</div>
+                    <div class="job-content">
+                        <h3 class="job-title">${job.title}</h3>
+                        <div class="job-company">
+                            <i class="fas fa-building"></i>
+                            ${job.company}
+                        </div>
+                        <div class="job-meta">
+                            <div class="job-meta-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                ${job.location}
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-briefcase"></i>
+                                ${job.type}
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-layer-group"></i>
+                                ${job.experience}
+                            </div>
+                            <div class="job-meta-item">
+                                <i class="fas fa-clock"></i>
+                                ${job.posted}
+                            </div>
+                        </div>
+                        <div class="job-tags">
+                            ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('')}
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+                            <div class="salary-badge">
+                                <i class="fas fa-money-bill-wave"></i>
+                                ${job.salary}
+                            </div>
+                            <div class="job-actions">
+                                <button class="btn-save" onclick="saveJob(${job.id})">
+                                    <i class="far fa-bookmark"></i>
+                                </button>
+                                <a href="#" class="btn-apply" onclick="applyJob(${job.id}); return false;">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Lamar Sekarang
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterJobs() {
+            const jobType = document.getElementById('jobTypeFilter').value;
+            const experience = document.getElementById('experienceFilter').value;
+            const salary = document.getElementById('salaryFilter').value;
+            
+            let filtered = jobs;
+            
+            if (jobType) {
+                filtered = filtered.filter(job => 
+                    job.type.toLowerCase().replace(' ', '') === jobType
+                );
+            }
+            
+            if (experience) {
+                filtered = filtered.filter(job => 
+                    job.experience.toLowerCase().includes(experience)
+                );
+            }
+            
+            renderJobs(filtered);
+        }
+
+        function saveJob(jobId) {
+            alert('Pekerjaan berhasil disimpan! Anda dapat melihatnya di halaman profil.');
+        }
+
+        function applyJob(jobId) {
+            const job = jobs.find(j => j.id === jobId);
+            if (confirm(`Lamar pekerjaan ${job.title} di ${job.company}?`)) {
+                alert('Lamaran berhasil dikirim! Tim HRD akan menghubungi Anda segera.');
+            }
+        }
+
+        // Event listeners for filters
+        document.getElementById('jobTypeFilter').addEventListener('change', filterJobs);
+        document.getElementById('experienceFilter').addEventListener('change', filterJobs);
+        document.getElementById('salaryFilter').addEventListener('change', filterJobs);
+
+        // Initial render
+        renderJobs();
+    </script>
 </body>
 </html>

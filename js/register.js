@@ -28,37 +28,37 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Validate form
             if (!name) {
-                alert('Nama lengkap harus diisi');
+                await showAlert('Nama lengkap harus diisi', 'Validasi', 'warning');
                 nameInput.focus();
                 return;
             }
             
             if (!email) {
-                alert('Email harus diisi');
+                await showAlert('Email harus diisi', 'Validasi', 'warning');
                 emailInput.focus();
                 return;
             }
             
             if (!isValidEmail(email)) {
-                alert('Format email tidak valid');
+                await showAlert('Format email tidak valid', 'Validasi', 'warning');
                 emailInput.focus();
                 return;
             }
             
             if (!password) {
-                alert('Kata sandi harus diisi');
+                await showAlert('Kata sandi harus diisi', 'Validasi', 'warning');
                 passwordInput.focus();
                 return;
             }
             
             if (password.length < 6) {
-                alert('Kata sandi minimal 6 karakter');
+                await showAlert('Kata sandi minimal 6 karakter', 'Validasi', 'warning');
                 passwordInput.focus();
                 return;
             }
             
             if (password !== confirmPassword) {
-                alert('Konfirmasi kata sandi tidak cocok');
+                await showAlert('Konfirmasi kata sandi tidak cocok', 'Validasi', 'warning');
                 confirmPasswordInput.focus();
                 return;
             }
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 localStorage.setItem('currentUser', JSON.stringify(userData));
                 localStorage.setItem('isLoggedIn', 'true');
                 
-                // Show success message with SweetAlert or similar would be better
-                alert('🎉 Pendaftaran berhasil! Anda akan diarahkan ke beranda.');
+                // Show success message
+                await showAlert('Pendaftaran berhasil! Anda akan diarahkan ke beranda.', 'Sukses', 'success');
                 
                 // Redirect to home page after a short delay
                 setTimeout(() => {
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
             } catch (error) {
                 console.error('Registration error:', error);
-                alert(error.message || 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.');
+                await showAlert(error.message || 'Terjadi kesalahan saat mendaftar. Silakan coba lagi.', 'Error', 'error');
                 submitButton.disabled = false;
                 submitButton.innerHTML = originalButtonText;
             }

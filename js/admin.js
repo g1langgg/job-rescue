@@ -1,5 +1,28 @@
+// Alert functions
+async function showAlert(message, title = 'Pemberitahuan', type = 'info') {
+    return new Promise(resolve => {
+        alert(`${title}: ${message}`);
+        resolve(true);
+    });
+}
+
+async function showConfirm(message, title = 'Konfirmasi') {
+    return new Promise(resolve => {
+        const result = confirm(`${title}: ${message}`);
+        resolve(result);
+    });
+}
+
+async function showPrompt(message, defaultValue = '', title = 'Input') {
+    return new Promise(resolve => {
+        const result = prompt(`${title}: ${message}`, defaultValue);
+        resolve(result);
+    });
+}
+
 (function(){
     const STORAGE_KEY = 'jr_jobs';
+    const TALENT_KEY = 'jr_talents';
     const USER_KEY = 'jr_admin';
     const USERS_KEY = 'jr_users';
 
@@ -11,17 +34,34 @@
         } catch {
             return null;
         }
+
+    async function addTalent(){
+        const name = await showPrompt('Nama Talent', '', 'Tambah Talent'); if(!name) return;
+        const title = await showPrompt('Judul/Posisi (mis. Barista, Driver)', '', 'Tambah Talent'); if(!title) return;
+        const location = await showPrompt('Lokasi', 'Bogor', 'Tambah Talent')||'Bogor';
+        const experience = await showPrompt('Pengalaman (mis. 2 tahun)', '1 tahun', 'Tambah Talent')||'1 tahun';
+        const workType = await showPrompt('Tipe Kerja (Full Time/Part Time/Freelance)', 'Full Time', 'Tambah Talent')||'Full Time';
+        const salary = await showPrompt('Gaji (mis. 3-5 juta)', '', 'Tambah Talent')||'';
+        const category = await showPrompt('Kategori (kuliner/retail/pendidikan/transportasi/properti/it)', 'kuliner', 'Tambah Talent')||'kuliner';
+        const skills = await showPrompt('Keahlian (pisahkan dengan koma)', '', 'Tambah Talent')||'';
+        const avatar = '👤';
+        const rating = 4.8;
+        const list = getTalents();
+        list.unshift({ id: Date.now(), name, title, location, experience, workType, salary, category, skills: skills.split(',').map(s=>s.trim()).filter(Boolean), avatar, rating });
+        setTalents(list);
+        await showAlert('Talent berhasil ditambahkan', 'Sukses', 'success');
+    }
     }
 
-    function guard(){
+    async function guard(){
         const u = getUser();
         if (!u) {
-            alert('Silakan login sebagai admin.');
+            await showAlert('Silakan login sebagai admin.', 'Akses Ditolak', 'warning');
             window.location.href = 'admin-login.html';
             return false;
         }
         if (u.role !== 'admin') {
-            alert('Akses ditolak. Hanya admin yang diperbolehkan.');
+            await showAlert('Akses ditolak. Hanya admin yang diperbolehkan.', 'Akses Ditolak', 'warning');
             window.location.href = 'admin-login.html';
             return false;
         }
@@ -35,6 +75,9 @@
 
     function getJobs(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); }catch{return [];} }
     function setJobs(list){ localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); }
+
+    function getTalents(){ try{ return JSON.parse(localStorage.getItem(TALENT_KEY)||'[]'); }catch{return [];} }
+    function setTalents(list){ localStorage.setItem(TALENT_KEY, JSON.stringify(list)); }
 
     function render(){
         const table = document.getElementById('adminJobsTable');
@@ -65,42 +108,45 @@
         tbody.querySelectorAll('.btnEdit').forEach(btn=>btn.addEventListener('click', onEdit));
     }
 
-    function onDelete(e){
+    async function onDelete(e){
         const idx = Number(e.currentTarget.getAttribute('data-idx'));
         const jobs = getJobs();
         if(!Number.isInteger(idx) || idx<0 || idx>=jobs.length) return;
-        if(!confirm('Hapus lowongan ini?')) return;
+        if(!await showConfirm('Hapus lowongan ini?', 'Konfirmasi Hapus')) return;
         jobs.splice(idx,1);
         setJobs(jobs);
         render();
+        await showAlert('Lowongan berhasil dihapus', 'Sukses', 'success');
     }
 
-    function onEdit(e){
+    async function onEdit(e){
         const idx = Number(e.currentTarget.getAttribute('data-idx'));
         const jobs = getJobs();
         const j = jobs[idx]; if(!j) return;
-        const title = prompt('Judul', j.title||''); if(title===null) return;
-        const company = prompt('Perusahaan', j.company||''); if(company===null) return;
-        const location = prompt('Lokasi', j.location||''); if(location===null) return;
-        const type = prompt('Tipe', j.type||''); if(type===null) return;
-        const salary = prompt('Gaji', j.salary||''); if(salary===null) return;
-        const description = prompt('Deskripsi', j.description||''); if(description===null) return;
+        const title = await showPrompt('Judul', j.title||'', 'Edit Lowongan'); if(title===null) return;
+        const company = await showPrompt('Perusahaan', j.company||'', 'Edit Lowongan'); if(company===null) return;
+        const location = await showPrompt('Lokasi', j.location||'', 'Edit Lowongan'); if(location===null) return;
+        const type = await showPrompt('Tipe', j.type||'', 'Edit Lowongan'); if(type===null) return;
+        const salary = await showPrompt('Gaji', j.salary||'', 'Edit Lowongan'); if(salary===null) return;
+        const description = await showPrompt('Deskripsi', j.description||'', 'Edit Lowongan'); if(description===null) return;
         jobs[idx] = { ...j, title, company, location, type, salary, description };
         setJobs(jobs);
         render();
+        await showAlert('Lowongan berhasil diupdate', 'Sukses', 'success');
     }
 
-    function addJob(){
-        const title = prompt('Judul'); if(!title) return;
-        const company = prompt('Perusahaan'); if(!company) return;
-        const location = prompt('Lokasi'); if(!location) return;
-        const type = prompt('Tipe'); if(!type) return;
-        const salary = prompt('Gaji (opsional)')||'';
-        const description = prompt('Deskripsi'); if(!description) return;
+    async function addJob(){
+        const title = await showPrompt('Judul', '', 'Tambah Lowongan'); if(!title) return;
+        const company = await showPrompt('Perusahaan', '', 'Tambah Lowongan'); if(!company) return;
+        const location = await showPrompt('Lokasi', '', 'Tambah Lowongan'); if(!location) return;
+        const type = await showPrompt('Tipe (Full-time/Part-time)', '', 'Tambah Lowongan'); if(!type) return;
+        const salary = await showPrompt('Gaji (opsional)', '', 'Tambah Lowongan')||'';
+        const description = await showPrompt('Deskripsi', '', 'Tambah Lowongan'); if(!description) return;
         const jobs = getJobs();
         jobs.unshift({ id: Date.now(), title, company, location, type, salary, description });
         setJobs(jobs);
         render();
+        await showAlert('Lowongan berhasil ditambahkan', 'Sukses', 'success');
     }
 
     function escapeHtml(s){ return (s||'').toString().replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c])); }
@@ -125,23 +171,35 @@
 
     function getAllUsers(){ try{ return JSON.parse(localStorage.getItem(USERS_KEY)||'[]'); }catch{return [];} }
     function setAllUsers(list){ localStorage.setItem(USERS_KEY, JSON.stringify(list)); }
-    function onUserDelete(e){
+    async function onUserDelete(e){
         const idx = Number(e.currentTarget.getAttribute('data-idx'));
         const list = getAllUsers();
         const user = list[idx]; if(!user) return;
-        if(user.email==='admin@jobrescue.local') return alert('Tidak bisa menghapus admin default.');
-        if(!confirm('Hapus user ini?')) return;
+        if(user.email==='admin@jobrescue.local') {
+            await showAlert('Tidak bisa menghapus admin default.', 'Akses Ditolak', 'warning');
+            return;
+        }
+        if(!await showConfirm('Hapus user ini?', 'Konfirmasi Hapus')) return;
         list.splice(idx,1); setAllUsers(list); renderUsers(); updateOverview();
+        await showAlert('User berhasil dihapus', 'Sukses', 'success');
     }
 
-    function addUser(){
-        const name = prompt('Nama'); if(!name) return;
-        const email = prompt('Email'); if(!email) return;
-        const pass = prompt('Password (min 6)'); if(!pass || pass.length<6) return alert('Password minimal 6 karakter');
-        const isAdmin = confirm('Jadikan admin? OK=Ya');
+    async function addUser(){
+        const name = await showPrompt('Nama', '', 'Tambah User'); if(!name) return;
+        const email = await showPrompt('Email', '', 'Tambah User'); if(!email) return;
+        const pass = await showPrompt('Password (min 6)', '', 'Tambah User');
+        if(!pass || pass.length<6) {
+            await showAlert('Password minimal 6 karakter', 'Validasi', 'warning');
+            return;
+        }
+        const isAdmin = await showConfirm('Jadikan admin?', 'Role User');
         const list = getAllUsers();
-        if(list.find(u=>u.email===email)) return alert('Email sudah ada.');
+        if(list.find(u=>u.email===email)) {
+            await showAlert('Email sudah ada.', 'Error', 'error');
+            return;
+        }
         list.push({ name, email, passwordHash: btoa(pass), isAdmin }); setAllUsers(list); renderUsers(); updateOverview();
+        await showAlert('User berhasil ditambahkan', 'Sukses', 'success');
     }
 
     function switchTab(target){
@@ -167,9 +225,16 @@
 
     function init(){
         if(!guard()) return;
-        document.getElementById('btnAddJob').addEventListener('click', addJob);
-        document.getElementById('btnClearAll').addEventListener('click', function(){
-            if(confirm('Hapus semua lowongan?')){ localStorage.setItem(STORAGE_KEY, '[]'); render(); }
+        document.getElementById('btnAddJob')?.addEventListener('click', addJob);
+        // Quick actions on dashboard
+        document.getElementById('btnAddJobQuick')?.addEventListener('click', addJob);
+        document.getElementById('btnAddTalentQuick')?.addEventListener('click', addTalent);
+        document.getElementById('btnClearAll').addEventListener('click', async function(){
+            if(await showConfirm('Hapus semua lowongan?', 'Konfirmasi')){
+                localStorage.setItem(STORAGE_KEY, '[]');
+                render();
+                await showAlert('Semua lowongan berhasil dihapus', 'Sukses', 'success');
+            }
         });
         document.getElementById('adminLogoutBtn').addEventListener('click', function(e){
             e.preventDefault(); 

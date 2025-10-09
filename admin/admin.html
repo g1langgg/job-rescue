@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JobRescue</title>
+    <link rel="icon" type="image/png" href="../img/favicon.svg">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin-dashboard-new.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">
+                    <img src="../img/favicon.svg" alt="JobRescue Logo">
+                </div>
+                <div class="sidebar-logo-text">JobRescue</div>
+            </div>
+            
+            <ul class="menu">
+                <li class="menu-item">
+                    <a href="#" class="menu-link active">
+                        <i class="fas fa-th-large"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Jobs</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <i class="fas fa-users"></i>
+                        <span>Candidates</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <i class="fas fa-file-lines"></i>
+                        <span>Applications</span>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reports</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="help-section">
+                <div class="help-card">
+                    <div class="help-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h4>Need help?</h4>
+                    <p>Do you have any problem with your lesson? Also, you need to hire a new developer.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="dashboard-content">
+                <div class="main-section">
+                    <div class="welcome-banner">
+                        <div class="welcome-content">
+                            <h2 class="welcome-title">Selamat datang kembali, Admin JobRescue!</h2>
+                            <p class="welcome-text">Hari ini ada 12 lamaran baru yang masuk. Kelola lowongan, pantau kandidat aktif, dan jadwalkan interview dengan mudah. <a href="#" class="learn-more">Pelajari lebih lanjut</a></p>
+                            <button class="play-lesson-btn">Lihat Lowongan</button>
+                        </div>
+                        <div class="welcome-illustration">
+                            <div class="books-stack">
+                                <div class="book book-1"></div>
+                                <div class="book book-2"></div>
+                                <div class="book book-3"></div>
+                            </div>
+                        </div>
+                        <div class="quick-actions">
+                            <button class="qa-btn" id="btnAddJobQuick"><i class="fas fa-plus"></i> Tambah Lowongan</button>
+                            <button class="qa-btn" id="btnAddTalentQuick"><i class="fas fa-user-plus"></i> Tambah Talent</button>
+                        </div>
+                    </div>
+                    
+                    <div class="overview-section">
+                        <div class="section-header">
+                            <h3 class="section-title">Overview</h3>
+                            <a href="#" class="view-all">Lihat semua laporan <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="kpi-cards">
+                            <div class="kpi-card kpi-jobs">
+                                <div class="kpi-icon"><i class="fas fa-briefcase"></i></div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value">24</div>
+                                    <div class="kpi-label">Lowongan Aktif</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card kpi-candidates">
+                                <div class="kpi-icon"><i class="fas fa-users"></i></div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value">126</div>
+                                    <div class="kpi-label">Kandidat Aktif</div>
+                                </div>
+                            </div>
+                            <div class="kpi-card kpi-apps">
+                                <div class="kpi-icon"><i class="fas fa-file-signature"></i></div>
+                                <div class="kpi-content">
+                                    <div class="kpi-value">12</div>
+                                    <div class="kpi-label">Lamaran Baru Hari Ini</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="applications-section">
+                        <div class="section-header">
+                            <h3 class="section-title">Recent Applications</h3>
+                            <a href="#" class="view-all">Lihat semua <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="applications-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Candidate</th>
+                                        <th>Position</th>
+                                        <th>Stage</th>
+                                        <th>Applied</th>
+                                        <th>Resume</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="candidate">
+                                                <div class="candidate-avatar">GS</div>
+                                                <div>
+                                                    <div class="candidate-name">Gary D. Schmaltz</div>
+                                                    <div class="candidate-email">gary.schmaltz@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-developer">React Developer</span></td>
+                                        <td><span class="stage-badge screening">Screening</span></td>
+                                        <td>08/10/2025</td>
+                                        <td><button class="download-btn">Download</button></td>
+                                        <td><span class="status-badge pending">Pending</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="candidate">
+                                                <div class="candidate-avatar">LM</div>
+                                                <div>
+                                                    <div class="candidate-name">Lawrence A. Morrow</div>
+                                                    <div class="candidate-email">lawrence.morrow@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-designer">UI/UX Designer</span></td>
+                                        <td><span class="stage-badge interview">Interview</span></td>
+                                        <td>07/10/2025</td>
+                                        <td><button class="download-btn">Download</button></td>
+                                        <td><span class="status-badge done">Reviewed</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="candidate">
+                                                <div class="candidate-avatar">JG</div>
+                                                <div>
+                                                    <div class="candidate-name">Jeremy C. Gibson</div>
+                                                    <div class="candidate-email">jeremy.gibson@example.com</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge badge-marketing">Product Manager</span></td>
+                                        <td><span class="stage-badge offer">Offer</span></td>
+                                        <td>05/10/2025</td>
+                                        <td><button class="download-btn">Download</button></td>
+                                        <td><span class="status-badge done">Accepted</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-content">
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button class="nav-btn"><i class="fas fa-chevron-left"></i></button>
+                            <h3 class="calendar-title">December 2022</h3>
+                            <button class="nav-btn"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                        
+                        <div class="calendar-grid">
+                            <div class="day-header">Mon</div>
+                            <div class="day-header">Tue</div>
+                            <div class="day-header">Wed</div>
+                            <div class="day-header">Thu</div>
+                            <div class="day-header">Fri</div>
+                            <div class="day-header">Sat</div>
+                            <div class="day-header">Sun</div>
+                            
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day"></div>
+                            <div class="calendar-day">1</div>
+                            <div class="calendar-day">2</div>
+                            <div class="calendar-day">3</div>
+                            <div class="calendar-day">4</div>
+                            
+                            <div class="calendar-day">5</div>
+                            <div class="calendar-day">6</div>
+                            <div class="calendar-day">7</div>
+                            <div class="calendar-day active">8</div>
+                            <div class="calendar-day">9</div>
+                            <div class="calendar-day">10</div>
+                            <div class="calendar-day">11</div>
+                            
+                            <div class="calendar-day">12</div>
+                            <div class="calendar-day">13</div>
+                            <div class="calendar-day">14</div>
+                            <div class="calendar-day">15</div>
+                            <div class="calendar-day">16</div>
+                            <div class="calendar-day">17</div>
+                            <div class="calendar-day">18</div>
+                            
+                            <div class="calendar-day">19</div>
+                            <div class="calendar-day">20</div>
+                            <div class="calendar-day">21</div>
+                            <div class="calendar-day">22</div>
+                            <div class="calendar-day">23</div>
+                            <div class="calendar-day">24</div>
+                            <div class="calendar-day">25</div>
+                            
+                            <div class="calendar-day">26</div>
+                            <div class="calendar-day">27</div>
+                            <div class="calendar-day">28</div>
+                            <div class="calendar-day">29</div>
+                            <div class="calendar-day">30</div>
+                            <div class="calendar-day">31</div>
+                            <div class="calendar-day"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="reminders-section">
+                        <h3 class="reminders-title">Reminders</h3>
+                        
+                        <div class="reminder-item">
+                            <div class="reminder-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>Interview - React Developer</h4>
+                                <p>09 Oct 2025, 10:00 WIB</p>
+                            </div>
+                        </div>
+                        
+                        <div class="reminder-item">
+                            <div class="reminder-icon">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                            <div class="reminder-content">
+                                <h4>Follow-up Kandidat</h4>
+                                <p>8 kandidat belum dibalas</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Saya - JobRescue</title>
+  <link rel="icon" type="image/png" href="../img/favicon.svg" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/user-menu.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root { --brand:#f97316; --brand2:#ea580c; }
+    body { font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height:100vh; }
+    .header { background: rgba(255,255,255,0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.4); }
+    .profile-hero { max-width:1100px; margin: 110px auto 0; padding: 0 24px 16px; }
+    .hero-card { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.35); border-radius: 22px; padding: 18px 22px; color:#fff; display:flex; align-items:center; justify-content:space-between; box-shadow: 0 20px 60px rgba(102,126,234,.25); }
+    .hero-title { font-size: 24px; font-weight: 900; letter-spacing: .2px; text-shadow: 0 2px 6px rgba(0,0,0,.15); }
+    .crumbs { font-size: 12px; opacity:.9 }
+    .crumbs a { color:#fff; text-decoration: none; opacity:.95 }
+    .badge-pro { display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border-radius:999px; background:linear-gradient(135deg,#fbbf24,#f59e0b); color:#fff; font-weight:800; font-size:11px; box-shadow: 0 10px 24px rgba(251,191,36,.4); }
+
+    .profile-wrap { max-width: 1100px; margin: 18px auto 60px; padding: 0 24px; }
+    .profile-grid { display:grid; grid-template-columns: 340px 1fr; gap: 24px; }
+    @media(max-width: 900px){ .profile-grid{ grid-template-columns: 1fr; } }
+    .card { background: rgba(255,255,255,0.9); backdrop-filter: blur(18px); border:1px solid rgba(255,255,255,0.65); border-radius: 22px; box-shadow: 0 24px 60px rgba(15,23,42,.18); }
+    .card .card-body { padding: 24px; }
+    .avatar { width:120px; height:120px; border-radius:26px; display:grid; place-items:center; color:#fff; font-size:42px; font-weight:800; background: linear-gradient(135deg,#667eea,#764ba2); box-shadow: 0 20px 40px rgba(102,126,234,.35); position:relative; overflow:hidden; }
+    .avatar img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .muted { color:#64748b; }
+    .name { font-size:26px; font-weight:900; color:#0f172a; margin:12px 0 6px; letter-spacing:.2px; }
+    .btn { display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer; font-weight:800; border-radius:14px; padding:12px 16px; transition:.25s; }
+    .btn-primary { background: linear-gradient(135deg, var(--brand), var(--brand2)); color:#fff; box-shadow: 0 16px 32px rgba(249,115,22,.35); }
+    .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 22px 44px rgba(249,115,22,.45); }
+    .btn-outline { background:#fff; color:#334155; border:2px solid #e2e8f0; }
+    .btn-outline:hover{ border-color:#cbd5e1; transform: translateY(-2px); }
+    .row { display:grid; grid-template-columns: 1fr 1fr; gap:16px; }
+    @media(max-width:700px){ .row{ grid-template-columns:1fr; } }
+    .field { display:flex; flex-direction:column; gap:6px; }
+    .label { font-weight:600; color:#334155; font-size:13px; }
+    .input { padding:14px 16px; border:2px solid #e2e8f0; border-radius:12px; font-size:14px; background:#fff; transition:.2s; }
+    .input:focus{ outline:none; border-color:#a78bfa; box-shadow: 0 0 0 4px rgba(167,139,250,.2); }
+    .section-title { font-size:18px; font-weight:800; color:#1f2937; margin-bottom:14px; }
+    .list { display:flex; flex-direction:column; gap:12px; }
+    .list-item { display:flex; align-items:center; justify-content:space-between; padding:14px; border:1px solid rgba(0,0,0,0.06); border-radius:14px; background:#fff; box-shadow:0 10px 24px rgba(2,6,23,.06); }
+    .tiny { font-size:12px; color:#94a3b8; }
+  </style>
+</head>
+<body>
+  <div class="particles-container" id="particles"></div>
+  <header class="header">
+    <nav class="nav">
+      <div class="nav-brand">
+        <div class="logo"><img src="../img/icon.svg" alt="Logo JobRescue"></div>
+        <span class="brand-text">JobRescue</span>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="index.html" class="nav-link">Beranda</a></li>
+        <li><a href="cari-kerja.html" class="nav-link">Cari Kerja</a></li>
+        <li><a href="cari-talent.html" class="nav-link">Cari Talent</a></li>
+        <li><a href="tentang.html" class="nav-link">Tentang</a></li>
+        <li><a href="login.html" class="nav-link" id="navLoginLink">Login</a></li>
+      </ul>
+      <button class="btn-register" id="navRegisterBtn" onclick="redirectToRegister()">Daftar</button>
+      <div class="user-menu" id="userMenu" style="display: none;"></div>
+      <div class="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+  </header>
+
+  <div class="profile-hero">
+    <div class="hero-card">
+      <div>
+        <div class="crumbs"><a href="index.html">Beranda</a> · Profil</div>
+        <div class="hero-title">Profil Saya</div>
+      </div>
+      <div id="heroBadge" style="display:none" class="badge-pro"><i class="fas fa-crown"></i> PRO</div>
+    </div>
+  </div>
+
+  <main class="profile-wrap">
+    <div class="profile-grid">
+      <div class="card">
+        <div class="card-body" style="text-align:center">
+          <div id="pfAvatar" class="avatar" title="Ganti foto (klik)">U<img id="pfAvatarImg" alt="" style="display:none" /></div>
+          <div id="pfName" class="name">User</div>
+          <div id="pfEmail" class="muted">user@email.com</div>
+          <div style="margin-top:14px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+            <button class="btn btn-primary" id="btnEdit"><i class="fas fa-pen"></i>Edit Profil</button>
+            <button class="btn btn-outline" id="btnLogout"><i class="fas fa-sign-out-alt"></i>Keluar</button>
+          </div>
+          <div class="tiny" style="margin-top:8px;">Klik avatar untuk mengganti foto</div>
+          <input type="file" id="pfPhotoInput" accept="image/*" style="display:none" />
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title"><i class="fas fa-id-card"></i> Informasi Akun</div>
+          <div class="row">
+            <div class="field">
+              <label class="label">Nama Lengkap</label>
+              <input id="inpName" class="input" placeholder="Nama" />
+            </div>
+            <div class="field">
+              <label class="label">Email</label>
+              <input id="inpEmail" class="input" placeholder="Email" disabled />
+            </div>
+          </div>
+          <div style="margin-top:16px; display:flex; gap:10px;">
+            <button class="btn btn-primary" id="btnSave"><i class="fas fa-save"></i>Simpan</button>
+            <button class="btn btn-outline" id="btnCancel"><i class="fas fa-xmark"></i>Batal</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:24px;">
+      <div class="card-body">
+        <div class="section-title"><i class="fas fa-bookmark"></i> Lowongan Tersimpan</div>
+        <div class="list" id="savedList">
+          <div class="muted">Belum ada lowongan tersimpan.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../js/script.js?v=2"></script>
+  <script src="../js/simple-auth.js?v=2"></script>
+  <script>
+    // Simple client-side profile logic
+    (function(){
+      const user = JSON.parse(localStorage.getItem('jr_user') || 'null');
+      if (!user) {
+        window.location.href = 'login.html';
+        return;
+      }
+      const pfName = document.getElementById('pfName');
+      const pfEmail = document.getElementById('pfEmail');
+      const pfAvatar = document.getElementById('pfAvatar');
+      const inpName = document.getElementById('inpName');
+      const inpEmail = document.getElementById('inpEmail');
+
+      const displayName = (user.name || user.email || 'User');
+      pfName.textContent = displayName;
+      pfEmail.textContent = user.email || '';
+      const initial = (displayName[0]||'U').toUpperCase();
+      pfAvatar.firstChild.nodeValue = initial;
+      // Load avatar photo if exists
+      const pfAvatarImg = document.getElementById('pfAvatarImg');
+      if (user.photoUrl) {
+        pfAvatarImg.src = user.photoUrl;
+        pfAvatarImg.style.display = 'block';
+      }
+      inpName.value = displayName;
+      inpEmail.value = user.email || '';
+
+      document.getElementById('btnLogout').addEventListener('click', function(){
+        localStorage.removeItem('jr_user');
+        window.location.href = 'login.html';
+      });
+
+      const btnEdit = document.getElementById('btnEdit');
+      const btnSave = document.getElementById('btnSave');
+      const btnCancel = document.getElementById('btnCancel');
+
+      let editing = false;
+      function toggleEdit(on){
+        editing = on;
+        inpName.disabled = !on;
+        btnSave.style.display = on ? 'inline-flex' : 'none';
+        btnCancel.style.display = on ? 'inline-flex' : 'none';
+      }
+      toggleEdit(false);
+
+      btnEdit.addEventListener('click', function(){ toggleEdit(true); });
+      btnCancel.addEventListener('click', function(){ 
+        inpName.value = displayName; 
+        toggleEdit(false);
+      });
+      btnSave.addEventListener('click', function(){
+        const newName = inpName.value.trim();
+        if (newName.length < 2) { alert('Nama terlalu pendek'); return; }
+        const updated = { ...user, name: newName };
+        localStorage.setItem('jr_user', JSON.stringify(updated));
+        pfName.textContent = newName;
+        pfAvatar.firstChild.nodeValue = (newName[0]||'U').toUpperCase();
+        toggleEdit(false);
+        alert('Profil disimpan');
+      });
+
+      // Avatar upload handler
+      const pfPhotoInput = document.getElementById('pfPhotoInput');
+      pfAvatar.addEventListener('click', function(){ pfPhotoInput.click(); });
+      pfPhotoInput.addEventListener('change', function(){
+        const file = this.files && this.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(e){
+          const url = e.target.result;
+          const u2 = { ...JSON.parse(localStorage.getItem('jr_user')||'{}'), photoUrl: url };
+          localStorage.setItem('jr_user', JSON.stringify(u2));
+          pfAvatarImg.src = url;
+          pfAvatarImg.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Show PRO badge if subscription active (optional)
+      const sub = JSON.parse(localStorage.getItem('jr_user_subscription')||'null');
+      if (sub && sub.status === 'active') {
+        const heroBadge = document.getElementById('heroBadge');
+        if (heroBadge) heroBadge.style.display = 'inline-flex';
+      }
+
+      // Load saved jobs (placeholder demo)
+      const saved = JSON.parse(localStorage.getItem('jr_saved_jobs')||'[]');
+      const list = document.getElementById('savedList');
+      if (saved.length) {
+        list.innerHTML = '';
+        saved.slice(0,5).forEach(j => {
+          const item = document.createElement('div');
+          item.className = 'list-item';
+          item.innerHTML = `<div><strong>${j.title||'Lowongan'}</strong><div class="muted" style="font-size:12px;">${j.company||''}</div></div><button class="btn btn-outline" onclick="removeSaved(${j.id})"><i class='fas fa-trash'></i> Hapus</button>`;
+          list.appendChild(item);
+        });
+      }
+      window.removeSaved = function(id){
+        const arr = (JSON.parse(localStorage.getItem('jr_saved_jobs')||'[]')||[]).filter(x=>x.id!==id);
+        localStorage.setItem('jr_saved_jobs', JSON.stringify(arr));
+        location.reload();
+      }
+    })();
+  </script>
+</body>
+</html>

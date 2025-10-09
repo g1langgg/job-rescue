@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Admin login form handler
     const adminLoginForm = document.getElementById('loginForm');
     if (adminLoginForm && adminLoginForm.getAttribute('data-admin-login') === 'true') {
-        adminLoginForm.addEventListener('submit', function(e) {
+        adminLoginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const formData = new FormData(adminLoginForm);
@@ -54,15 +54,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Redirect to admin panel
                 window.location.href = 'admin.html';
             } else {
-                alert('Email atau password admin salah!');
+                await showAlert('Email atau password admin salah!', 'Login Gagal', 'error');
             }
         });
     }
     
     // Admin panel guard
-    function adminGuard() {
+    async function adminGuard() {
         if (!isAdminLoggedIn()) {
-            alert('Silakan login sebagai admin.');
+            await showAlert('Silakan login sebagai admin.', 'Akses Ditolak', 'warning');
             window.location.href = 'admin-login.html';
             return false;
         }

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profil Saya - JobRescue</title>
+  <link rel="icon" type="image/svg+xml" href="../img/icon.svg" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand:#f97316; --brand2:#ea580c; --bg:#f6f7fb; --card:#ffffff; --text:#0f172a; --muted:#64748b; --line:#e2e8f0; --purp1:#667eea; --purp2:#764ba2;
+    }
+    body{ margin:0; background:var(--bg); font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--text); }
+    .app{ display:grid; grid-template-columns: 260px 1fr; min-height:100vh; }
+    /* Sidebar */
+    .sidebar{ background:#ffffff; border-right:1px solid var(--line); padding:20px 16px; position:sticky; top:0; height:100vh; }
+    .brand{ display:flex; align-items:center; gap:12px; font-weight:800; font-size:20px; margin-bottom:22px; }
+    .brand-ico{ width:44px; height:44px; border-radius:14px; background: linear-gradient(135deg, var(--purp1), var(--purp2)); display:grid; place-items:center; box-shadow:0 12px 24px rgba(102,126,234,.35); }
+    .brand-ico img{ width:24px; height:24px; filter: none !important; }
+    .side-group{ margin-top:10px; }
+    .side-title{ font-size:12px; color:#94a3b8; padding:8px 10px; }
+    .menu{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+    .menu a{ display:flex; align-items:center; gap:14px; padding:14px 18px; text-decoration:none; color:#475569; border-radius:22px; font-weight:800; transition:all .2s ease; }
+    .menu a i{ color:#475569; }
+    .menu a:hover:not(.active){ background:#eef2ff; color:#3730a3; transform: translateY(-1px); }
+    .menu a:hover:not(.active) i{ color:#3730a3; }
+    .menu a.active{ background: linear-gradient(135deg, var(--purp1) 0%, var(--purp2) 100%); color:#fff; box-shadow:0 18px 36px rgba(102,126,234,.30); border:1px solid rgba(255,255,255,0.15); }
+    .menu a.active i{ color:#fff; }
+    .stat{ background:#f8fafc; border:1px solid var(--line); border-radius:12px; padding:12px; display:flex; justify-content:space-between; align-items:center; font-weight:700; }
+
+    /* Main area */
+    .main{ display:flex; flex-direction:column; }
+    .topbar{ background:transparent; border-bottom:none; padding:0 20px 0; display:flex; align-items:center; justify-content:space-between; position:relative; z-index:11; }
+    .tb-title{ font-weight:800; font-size:18px; color:#0f172a; }
+    .tb-user{ display:flex; align-items:center; gap:10px; padding:8px 12px; background:#fff; border:1px solid var(--line); border-radius:999px; box-shadow:0 8px 20px rgba(2,6,23,.06); }
+    .tb-avatar{ width:32px; height:32px; border-radius:50%; background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; display:grid; place-items:center; font-size:14px; font-weight:800; }
+    .tb-info{ display:flex; flex-direction:column; line-height:1.1; }
+    .tb-name{ font-weight:700; font-size:13px; color:#0f172a; }
+    .tb-email{ font-size:12px; color:#64748b; }
+
+    /* Cover */
+    .cover{ background:linear-gradient(135deg,#1d4ed8,#7c3aed); height:220px; position:relative; overflow:hidden; margin-top:-16px; }
+    .cover::after{ content:''; position:absolute; inset:0; opacity:.12; background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="400"><g fill="white" opacity="0.4"><circle cx="80" cy="80" r="60"/><rect x="260" y="40" width="200" height="120" rx="18"/></g></svg>') center/cover no-repeat; }
+    .cover-actions{ position:absolute; right:24px; bottom:16px; display:flex; gap:10px; }
+    .btn{ border:none; border-radius:10px; padding:10px 12px; font-weight:700; display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+    .btn-primary{ background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#fff; }
+    .btn-light{ background:#ffffff; color:#334155; border:1px solid var(--line); }
+    .hidden{ display:none; }
+
+    /* Content cards */
+    .content{ max-width:1100px; margin:-170px auto 40px; padding:0 20px; position:relative; z-index:10; }
+    .layout{ display:grid; grid-template-columns: 320px 1fr; gap:24px; align-items:start; }
+    @media(max-width:1000px){ .app{ grid-template-columns:1fr; } .sidebar{ position:relative; height:auto; } .layout{ grid-template-columns:1fr; } }
+    .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:0 10px 30px rgba(2,6,23,.06); }
+    .card-body{ padding:18px; }
+
+    .profile-card .photo{ width:96px; height:96px; border-radius:16px; overflow:hidden; background:linear-gradient(135deg,#667eea,#764ba2); color:#fff; display:grid; place-items:center; font-weight:900; font-size:34px; position:relative; }
+    .profile-card .photo img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .profile-card .name{ font-weight:900; font-size:20px; margin-top:10px; }
+    .profile-card .email{ color:var(--muted); font-size:13px; }
+    .metrics{ display:flex; flex-direction:column; gap:10px; margin-top:14px; }
+    .metric{ display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border:1px solid var(--line); border-radius:12px; background:#f8fafc; }
+
+    /* Tabs */
+    .tabs{ display:flex; gap:8px; padding:12px 12px 0; border-bottom:1px solid var(--line); overflow-x:auto; }
+    .tab{ padding:10px 12px; border-radius:10px 10px 0 0; font-weight:700; cursor:pointer; color:#475569; }
+    .tab.active{ background:#fff; border:1px solid var(--line); border-bottom-color:#fff; color:#0f172a; }
+    .tab-panel{ display:none; padding:16px; }
+    .tab-panel.active{ display:block; }
+
+    /* Form */
+    .form-grid{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    @media(max-width:800px){ .form-grid{ grid-template-columns:1fr; } }
+    .field{ display:flex; flex-direction:column; gap:6px; }
+    .label{ font-size:13px; font-weight:600; color:#334155; }
+    .input, .select{ height:42px; padding:10px 12px; border:1px solid var(--line); border-radius:10px; font-family:inherit; font-size:14px; }
+    .input:focus, .select:focus{ outline:none; border-color:#a78bfa; box-shadow:0 0 0 4px rgba(167,139,250,.2); }
+    .actions{ display:flex; justify-content:flex-end; margin-top:16px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-ico"><img src="../img/icon.svg" alt=""/></div> <span>JobRescue</span></div>
+      <div class="side-group">
+        <div class="side-title">Menu</div>
+        <ul class="menu">
+          <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+          <li><a class="active" href="#"><i class="fas fa-user"></i> Profil</a></li>
+          <li><a href="cari-kerja.html"><i class="fas fa-briefcase"></i> Pekerjaan</a></li>
+          <li><a href="saved.html"><i class="fas fa-bookmark"></i> Tersimpan</a></li>
+          <li><a href="tentang.html"><i class="fas fa-circle-info"></i> Tentang</a></li>
+        </ul>
+      </div>
+      <div class="side-group" style="margin-top:18px;">
+        <div class="side-title">Statistik</div>
+        <div class="stat"><span>Apply</span><span id="stApply">0</span></div>
+        <div class="stat" style="margin-top:8px;"><span>Wawancara</span><span id="stInterview">0</span></div>
+        <div class="stat" style="margin-top:8px;"><span>Ditolak</span><span id="stRejected">0</span></div>
+      </div>
+    </aside>
+
+    <section class="main">
+      <div class="topbar">
+        <div class="tb-title">Profil</div>
+        <div class="tb-user">
+          <div id="tbAvatar" class="tb-avatar">U</div>
+          <div class="tb-info">
+            <div id="tbName" class="tb-name">User</div>
+            <div id="tbEmail" class="tb-email">user@email.com</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cover" id="cover">
+        <div class="cover-actions">
+          <button class="btn btn-light" id="btnChangeCover"><i class="fas fa-image"></i> Ganti Cover</button>
+          <input type="file" id="coverInput" accept="image/*" class="hidden" />
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="layout">
+          <!-- Left profile card -->
+          <div class="card profile-card">
+            <div class="card-body" style="display:flex; gap:14px; align-items:center;">
+              <div class="photo" id="pPhoto">U<img id="pPhotoImg" style="display:none" alt=""/></div>
+              <div>
+                <div class="name" id="pName">User</div>
+                <div class="email" id="pEmail">user@email.com</div>
+                <div style="margin-top:10px; display:flex; gap:8px;">
+                  <button class="btn btn-primary" id="btnChangePhoto"><i class="fas fa-camera"></i> Ganti Foto</button>
+                  <input type="file" id="photoInput" accept="image/*" class="hidden" />
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="metrics">
+                <div class="metric"><span>Kesempatan berjalan</span><strong id="mRunning">0</strong></div>
+                <div class="metric"><span>Lamaran terkirim</span><strong id="mApplied">0</strong></div>
+                <div class="metric"><span>Profil dilihat</span><strong id="mViewed">0</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right details with tabs -->
+          <div class="card">
+            <div class="tabs">
+              <div class="tab active" data-tab="acc">Account Settings</div>
+              <div class="tab" data-tab="company">Company</div>
+              <div class="tab" data-tab="docs">Documents</div>
+              <div class="tab" data-tab="notify">Notifications</div>
+            </div>
+            <div class="tab-panel active" id="tab-acc">
+              <div class="form-grid">
+                <div class="field"><label class="label">First Name</label><input class="input" id="fFirst"/></div>
+                <div class="field"><label class="label">Last Name</label><input class="input" id="fLast"/></div>
+                <div class="field"><label class="label">Phone Number</label><input class="input" id="fPhone" placeholder="+62"/></div>
+                <div class="field"><label class="label">Email</label><input class="input" id="fEmail" disabled/></div>
+                <div class="field"><label class="label">City</label><input class="input" id="fCity"/></div>
+                <div class="field"><label class="label">State/Province</label><input class="input" id="fState"/></div>
+                <div class="field"><label class="label">Postcode</label><input class="input" id="fPost"/></div>
+                <div class="field"><label class="label">Country</label>
+                  <select class="select" id="fCountry">
+                    <option value="Indonesia">Indonesia</option>
+                    <option value="Malaysia">Malaysia</option>
+                    <option value="Singapore">Singapore</option>
+                  </select>
+                </div>
+              </div>
+              <div class="actions"><button class="btn btn-primary" id="btnSaveAcc"><i class="fas fa-save"></i> Update</button></div>
+            </div>
+
+            <div class="tab-panel" id="tab-company">
+              <div class="field"><label class="label">Company Name</label><input class="input" id="cName"/></div>
+              <div class="field" style="margin-top:10px"><label class="label">Website</label><input class="input" id="cWeb" placeholder="https://"/></div>
+              <div class="actions"><button class="btn btn-primary" id="btnSaveCompany"><i class="fas fa-save"></i> Simpan</button></div>
+            </div>
+
+            <div class="tab-panel" id="tab-docs">
+              <div class="field"><label class="label">CV/Resume</label><input class="input" type="file" id="cvFile" accept="application/pdf"/></div>
+              <div class="tiny" style="margin-top:6px">PDF maks 2MB. Disimpan lokal (demo).</div>
+            </div>
+
+            <div class="tab-panel" id="tab-notify">
+              <label style="display:flex; align-items:center; gap:10px;">
+                <input type="checkbox" id="nEmail"/> Email me new job matches
+              </label>
+              <label style="display:flex; align-items:center; gap:10px; margin-top:10px;">
+                <input type="checkbox" id="nMarketing"/> Receive tips and updates
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script src="../js/simple-auth.js?v=2"></script>
+  <script>
+    // Load user or redirect
+    const user = JSON.parse(localStorage.getItem('jr_user')||'null');
+    if (!user) { location.href = 'login.html'; }
+
+    // Populate header profile (topbar)
+    const displayName = (user.name || user.email || 'User');
+    const firstName = displayName.split(' ')[0];
+    const initial = (displayName[0]||'U').toUpperCase();
+    const elTbName = document.getElementById('tbName');
+    const elTbEmail = document.getElementById('tbEmail');
+    const elTbAvatar = document.getElementById('tbAvatar');
+    if (elTbName) elTbName.textContent = firstName;
+    if (elTbEmail) elTbEmail.textContent = user.email || '';
+    if (elTbAvatar) elTbAvatar.textContent = initial;
+
+    // Populate left card
+    document.getElementById('pName').textContent = displayName;
+    document.getElementById('pEmail').textContent = user.email || '';
+    const pPhotoImg = document.getElementById('pPhotoImg');
+    if (user.photoUrl) { pPhotoImg.src = user.photoUrl; pPhotoImg.style.display='block'; }
+
+    // Stats demo
+    const stats = JSON.parse(localStorage.getItem('jr_stats')||'{"applied":12,"interview":3,"rejected":1,"running":2,"viewed":45}');
+    document.getElementById('stApply').textContent = stats.applied||0;
+    document.getElementById('stInterview').textContent = stats.interview||0;
+    document.getElementById('stRejected').textContent = stats.rejected||0;
+    document.getElementById('mRunning').textContent = stats.running||0;
+    document.getElementById('mApplied').textContent = stats.applied||0;
+    document.getElementById('mViewed').textContent = stats.viewed||0;
+
+    // Tabs
+    document.querySelectorAll('.tab').forEach(t=>{
+      t.addEventListener('click',()=>{
+        document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(x=>x.classList.remove('active'));
+        t.classList.add('active');
+        document.getElementById('tab-'+t.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Account fields
+    const acc = JSON.parse(localStorage.getItem('jr_profile')||'{}');
+    const q=(id)=>document.getElementById(id);
+    q('fFirst').value = acc.first||displayName.split(' ')[0]||'';
+    q('fLast').value = acc.last||'';
+    q('fPhone').value = acc.phone||'';
+    q('fEmail').value = user.email||'';
+    q('fCity').value = acc.city||'';
+    q('fState').value = acc.state||'';
+    q('fPost').value = acc.post||'';
+    q('fCountry').value = acc.country||'Indonesia';
+
+    document.getElementById('btnSaveAcc').addEventListener('click', ()=>{
+      const data = {
+        first:q('fFirst').value.trim(), last:q('fLast').value.trim(), phone:q('fPhone').value.trim(),
+        city:q('fCity').value.trim(), state:q('fState').value.trim(), post:q('fPost').value.trim(), country:q('fCountry').value
+      };
+      localStorage.setItem('jr_profile', JSON.stringify(data));
+      // Update display name if changed
+      const newName = [data.first, data.last].filter(Boolean).join(' ').trim();
+      if (newName) {
+        const merged = { ...user, name:newName };
+        localStorage.setItem('jr_user', JSON.stringify(merged));
+        const elTbName2 = document.getElementById('tbName');
+        if (elTbName2) elTbName2.textContent = data.first || 'User';
+        document.getElementById('pName').textContent = newName;
+      }
+      alert('Profil berhasil diperbarui');
+    });
+
+    // Change photo
+    document.getElementById('btnChangePhoto').addEventListener('click',()=>document.getElementById('photoInput').click());
+    document.getElementById('photoInput').addEventListener('change', function(){
+      const f = this.files && this.files[0]; if(!f) return;
+      const r = new FileReader(); r.onload = (e)=>{
+        const updated = { ...JSON.parse(localStorage.getItem('jr_user')||'{}'), photoUrl:e.target.result };
+        localStorage.setItem('jr_user', JSON.stringify(updated));
+        pPhotoImg.src = e.target.result; pPhotoImg.style.display='block';
+      }; r.readAsDataURL(f);
+    });
+
+    // Change cover (store as jr_cover)
+    document.getElementById('btnChangeCover').addEventListener('click',()=>document.getElementById('coverInput').click());
+    document.getElementById('coverInput').addEventListener('change', function(){
+      const f = this.files && this.files[0]; if(!f) return;
+      const r = new FileReader(); r.onload = (e)=>{
+        localStorage.setItem('jr_cover', e.target.result);
+        document.getElementById('cover').style.backgroundImage = `url(${e.target.result})`;
+        document.getElementById('cover').style.backgroundSize = 'cover';
+        document.getElementById('cover').style.backgroundPosition = 'center';
+      }; r.readAsDataURL(f);
+    });
+    const cov = localStorage.getItem('jr_cover');
+    if (cov){ const el=document.getElementById('cover'); el.style.backgroundImage=`url(${cov})`; el.style.backgroundSize='cover'; el.style.backgroundPosition='center'; }
+  </script>
+</body>
+</html>
